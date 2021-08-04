@@ -23,7 +23,7 @@ export const setSingleGenie = (genie) => {
 export const fetchSingleGenie = (genieId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/genies/${genieId}`);
+      const { data } = await axios.get(`/api/genies/${genieId}`);
       dispatch(setSingleGenie(data));
     } catch(err) {
       console.log(err);

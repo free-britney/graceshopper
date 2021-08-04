@@ -3,33 +3,23 @@ import { connect } from 'react-redux';
 import { fetchSingleGenie } from '../store/singleGenieRedux';
 import { Link } from 'react-router-dom';
 
-class SingleGenieComponent extends React.component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
+class SingleGenieComponent extends React.Component {
   componentDidMount() {
     this.props.loadSingleGenie(this.props.match.params.genieId);
   }
 
-  handleSubmit(evt) {
-    evt.preventDefault();
-  }
-
   render() {
-    const { handleSubmit } = this;
-    const genie  = this.props.genie[`${this.props.match.params.genieId}` - 1] || {}
+    const genie  = this.props.genie || {}
 
     return (
       <div>
-        <h1>{genie.name}</h1>
-        <h2>{genie.price}</h2>
+        <h1>Name: {genie.name}</h1>
+        <h2>Price: {genie.price}</h2>
         <img src={genie.imageURL} />
-        <p>{genie.description}</p>
-        <h3>{genie.wishQty}</h3>
-        <h3>{genie.inventory}</h3>
-        <h3>{genie.ability}</h3>
+        <h4>Description: {genie.description}</h4>
+        <h3>Wish Quantity: {genie.wishQty}</h3>
+        <h3>In stock: {genie.inventory}</h3>
+        <h3>Genie ability: {genie.ability}</h3>
       </div>
     )
   }
