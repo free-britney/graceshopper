@@ -4,8 +4,8 @@ const {Genie} = require('../db');
 
 router.post('/', async(req, res, next) => {
     try {
-        const newProject = await Project.create(req.body);
-        res.json(newProject);
+        const newGenie = await Genie.create(req.body);
+        res.json(newGenie);
     } catch (err){
         next(err)
     }
