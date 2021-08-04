@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { updateCart } from "../store/auth"
+import { updateCart } from "../store/cart"
 
 class EditCart extends Component {
   constructor(props) {

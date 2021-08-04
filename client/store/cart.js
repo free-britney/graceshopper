@@ -55,7 +55,7 @@ export const clearedCart = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
     if (token) {
-      await axios.put(`/api/cart/completed`, {
+      await axios.put(`/api/cart/purchased`, {
         headers: {
           authorization: token,
         },
