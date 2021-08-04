@@ -1,5 +1,14 @@
+* {
+  box-sizing: border-box;
+  font-family: "WindSong", cursive;
+  color: #24170f;
+}
+
 body {
-  font-family: sans-serif;
+  background: linear-gradient(white, #eeebea);
+  background-size: cover;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -11,8 +20,10 @@ label {
 }
 
 nav a {
-  display: inline-block;
-  margin: 1em;
+  align-items: center;
+  display: flex;
+  height: 80px;
+  padding: 10px;
 }
 
 form div {
