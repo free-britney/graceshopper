@@ -37,3 +37,14 @@ export const fetchGenies = () => {
 // This will take in state (we will set default state initial state to an array since I'm expecting an array of objects).
 // This will also take in an action object returned from the setGenies function.
 // Based on that action, it will update state.
+
+const initialGenies = [];
+
+export default function geniesReducer(state = initialGenies, action) {
+  switch (action.type) {
+    case SET_GENIES:
+      return action.genies;
+    default:
+      return state;
+  }
+}

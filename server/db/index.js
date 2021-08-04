@@ -17,9 +17,12 @@ User.hasMany(Order);
 
 module.exports = {
   db,
+  Genie,
+  // AN Question: Is there a reason we're exporting the below models this way?
+  // Someone put Genie in here previously in here and it caused a bug for me.
+  // I ended up moving Genie outside next to db to rectify.
   models: {
     User,
-    Genie,
     Order,
   },
 };
