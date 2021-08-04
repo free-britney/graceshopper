@@ -14,5 +14,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// EH Edit - this is the route to serve up single genies
+router.get('/:genieId', async (req, res, next) => {
+  try {
+    const singleGenie = await Genie.findByPk(req.params.genieId)
+    res.json(singleGenie);
+  } catch(error) {
+    next(error);
+  }
+})
+
 // AN Edit - Exporting Router
 module.exports = router;
