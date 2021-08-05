@@ -11,6 +11,9 @@ const Order = db.define("order", {
   orderStatus: {
     type: Sequelize.ENUM("pending", "purchased"),
   },
+  isCart: {
+    type: Sequelize.BOOLEAN,
+  }
 });
 
 module.exports = Order;

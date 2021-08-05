@@ -15,3 +15,12 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+// /users/cart/:id
+
+// if(req.user) {
+//   const order = await Order.findOne({
+//     where: {
+//       [Sequelize.Op.and]: [{userId: req.user.id},{orderStatus: 'pending'}],
+//     },
+//     include:Genie
+//   });

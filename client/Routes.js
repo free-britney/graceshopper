@@ -6,6 +6,7 @@ import AllGenies from "./components/AllGenies";
 import SingleGenieComponent from "./components/SingleGenieComponent"
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
+import Order from "./components/Order";
 import { me } from "./store";
 
 /**
@@ -28,6 +29,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
+            <Route exact path="/order" component={Order} />
             <Route exact path="/genies/:genieId" component={SingleGenieComponent} />
             <Redirect to="/home" />
           </Switch>
@@ -36,7 +38,6 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/genie/addgenie" component={AddGenieForm} />
           </Switch>
         )}
       </div>
