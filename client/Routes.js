@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 // AN Edit: Importing All Genies Component
 import AllGenies from "./components/AllGenies";
-import SingleGenieComponent from "./components/SingleGenieComponent"
+import SingleGenieComponent from "./components/SingleGenieComponent";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
@@ -28,7 +28,11 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
-            <Route exact path="/genies/:genieId" component={SingleGenieComponent} />
+            <Route
+              exact
+              path="/genies/:genieId"
+              component={SingleGenieComponent}
+            />
             <Redirect to="/home" />
           </Switch>
         ) : (
