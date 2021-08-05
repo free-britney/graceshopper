@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { updateCart } from "../store/cart"
+import { deleteCart, updateCart } from "../store/cart"
 
 class EditCart extends Component {
   constructor(props) {
@@ -15,11 +15,11 @@ class EditCart extends Component {
 
 
   handleAdd(genieId,currQty, genie) {
-    this.props.updatdedQty(genieId,1, genie)
+    this.props.updatedQty(genieId,1, genie)
   }
 
   handleSubtract(genieId,currQty, genie) {
-    this.props.updatdedQty(genieId,-1, genie)
+    this.props.updatedQty(genieId,-1, genie)
   }
 
   async handleDelete(id) {
@@ -28,34 +28,26 @@ class EditCart extends Component {
   }
 
   render() {
-    const { cart } = this.props;
     return (
       <div className = 'cart'>
-        <form id="edit-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={name}
-            onChange={handleChange}
-          />
+        {cart.genies && cart.genies.map((genie) => (
+          <div className = 'cart-item' key = {genie.Id || genie.genieId}>
+            <div>{genie.name}</div>
+            <h3>{genie.price}</h3>
+            <div>Remove Item</div>
+              {this.state.edit && genie.orderline?quantity>0 && (<button type = "button" onClick ={()=> this.handleSubtract(genie.id,1,genie)}></button>
+              )}
 
-          <div>
-            <input
-              type="integer"
-              name="wishQty"
-              placeholder="Quantity"
-              value={wishQty}
-              onChange={handleChange}
-            />
+            <div>Add Item  </div>
+             {this.state.edit && genie.orderline?quantity>0 && (<button type = "button" onClick ={()=> this.handleAdd(genie.id,1,genie)}></button>
+            )}
+            }
+
+        ))}
           </div>
-          <button type="submit">Update</button>
-        </form>
-        <form onSubmit={(evt) => evt.preventDefault()} />
-        <Link to="/cart">Cancel</Link>
+    </div>
+    )
 
-      </div>
-    );
   }
 }
 const mapStateToProps = (state) => {
@@ -64,7 +56,9 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch, { history }) => ({
-  updateCart: (cart) => dispatch(updateCart(cart, history)),
+  updatedQty: (genieId, currQty, genie) =>
+  dispatch(updateCart(genieId, currQty, genie)),
+  deleteFromCart:(id) => dispatch(deleteCart(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCart);
