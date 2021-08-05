@@ -14,7 +14,8 @@ router.put("/", async (req,res,next)=> {
         },
         include:Genie
       });
-      qty = quantity
+     const {genieId, inventory } = req.body
+     let item = order.g
     }
 
 

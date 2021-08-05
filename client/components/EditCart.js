@@ -5,36 +5,32 @@ import { updateCart } from "../store/cart"
 
 class EditCart extends Component {
   constructor(props) {
-
+    console.log('props', props);
     super(props);
     this.state = {
-      name: "",
-      wishQty: "",
+     edit:false
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
 
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value,
-    });
+  handleAdd(genieId,currQty, genie) {
+    this.props.updatdedQty(genieId,1, genie)
   }
 
-  handleSubmit(evt) {
-    evt.preventDefault();
-    this.props.updateCart({ ...this.props.match.params.id, ...this.state })
+  handleSubtract(genieId,currQty, genie) {
+    this.props.updatdedQty(genieId,-1, genie)
+  }
 
+  async handleDelete(id) {
+    await this.props.deleteFromCard(id);
+    this.props.getCart();
   }
 
   render() {
-    const { name, wishQty } = this.state;
-    const { handleSubmit, handleChange } = this;
-
+    const { cart } = this.props;
     return (
-      <div>
+      <div className = 'cart'>
         <form id="edit-form" onSubmit={handleSubmit}>
           <input
             type="text"
