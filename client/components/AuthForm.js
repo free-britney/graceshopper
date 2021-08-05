@@ -5,7 +5,7 @@ import {authenticate} from '../store'
 /**
  * COMPONENT
  */
-const AuthFormLogin = props => {
+const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
@@ -22,57 +22,6 @@ const AuthFormLogin = props => {
             <small>Password</small>
           </label>
           <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
-  )
-}
-
-const AuthFormSignup = props => {
-  const {name, displayName, handleSubmit, error} = props
-
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <label htmlFor="name">
-            <small>Name</small>
-          </label>
-          <input name="name" type="text" />
-        </div>
-        <div>
-          <label htmlFor="address">
-            <small>Address</small>
-          </label>
-          <input name="address" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="string" />
-        </div>
-        <div>
-          <label htmlFor="phone">
-            <small>Phone</small>
-          </label>
-          <input name="phone" type="integer" />
         </div>
         <div>
           <button type="submit">{displayName}</button>
@@ -118,5 +67,5 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthFormLogin)
-export const Signup = connect(mapSignup, mapDispatch)(AuthFormLogin)
+export const Login = connect(mapLogin, mapDispatch)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
