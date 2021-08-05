@@ -5,7 +5,8 @@ const Genie = require("../db/models/Genie");
 
 router.put("/", async (req, res, next) => {
   try {
-    const addToOrder = await Genie.findByPk(genieId);
+    const addToOrder = await Genie.findByPk(req.body.id);
+    console.log(req.body);
     res.json(addToOrder);
   } catch (error) {
     next(error);

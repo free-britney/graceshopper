@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { fetchGenies } from "../store/genies";
 // Import link.
 import { Link } from "react-router-dom";
-import { addToOrder } from "../store/orders";
+// import { addToOrder } from "../store/orders";
 
 // AN Edit: Write react class component to display all genies.
 export class AllGenies extends React.Component {
@@ -15,12 +15,10 @@ export class AllGenies extends React.Component {
   componentDidMount() {
     this.props.getGenies();
   }
-  handleClick = (genieId) => {
-    // this.props.history.push("/cart");
-    // some function that does the adding to cart
-    this.props.addToOrder(genieId);
-    alert("Added to Cart!");
-   }
+  // handleClick = (genieId) => {
+  //   this.props.addToOrder(genieId);
+  //   alert("Added to Cart!");
+  //  }
    render() {
      // Assigned a new variable, genies, to this.props.genies.
      const genies = this.props.genies;
@@ -65,7 +63,7 @@ export class AllGenies extends React.Component {
                           <span className="text-primary">Wish Quantity: </span>
                           {genie.wishQty}
                           <div/>
-                          <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button>
+                          {/* <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button> */}
                         </h6>
                       </div>
                     </div>
@@ -98,7 +96,7 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchGenies());
     },
     //make action here for adding to cart
-    addToOrder: (genieId) => dispatch(addToOrder(genieId))
+    // addToOrder: (genieId) => dispatch(addToOrder(genieId))
   };
 };
 
