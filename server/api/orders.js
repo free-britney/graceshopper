@@ -13,3 +13,10 @@ router.put("/", async (req, res, next) => {
 });
 
 module.exports = router;
+
+//orderline needs userId
+//order table 
+
+// if the product exists in cart 
+// else add to cart  -- (object)
+

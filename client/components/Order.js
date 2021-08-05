@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToOrder } from '../store/order';
+import { addToOrder } from '../store/orders';
 
 
 export class Order extends React.Component {

@@ -18,7 +18,7 @@ export const addGenieToOrder = (genie) => {
 export const addToOrder = (genieId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/order', genieId);
+      const { data } = await axios.put('/api/orders', genieId);
       dispatch(addGenieToOrder(genieId));
     } catch (err) {
       console.log(err);
