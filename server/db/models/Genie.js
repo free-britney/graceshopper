@@ -11,6 +11,7 @@ const Genie = db.define("genie", {
     type: Sequelize.FLOAT,
     allowNull: false,
   },
+  // o: you don't need Sequelize.TEXT here
   description: {
     type: Sequelize.TEXT,
     allowNull: false,
@@ -19,6 +20,7 @@ const Genie = db.define("genie", {
     type: Sequelize.TEXT,
     allowNull: false,
   },
+  // o: what is this?
   wishQty: {
     type: Sequelize.INTEGER,
     allowNull: false,

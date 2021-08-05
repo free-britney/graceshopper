@@ -1,15 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchSingleGenie } from "../store/singleGenieRedux";
-import { Link } from "react-router-dom";
+import React from 'react'
+import {connect} from 'react-redux'
+import {fetchSingleGenie} from '../store/singleGenieRedux'
+import {Link} from 'react-router-dom'
 
 class SingleGenieComponent extends React.Component {
   componentDidMount() {
-    this.props.loadSingleGenie(this.props.match.params.genieId);
+    this.props.loadSingleGenie(this.props.match.params.genieId)
   }
 
   render() {
-    const genie = this.props.genie || {};
+    // o: you can use nullish coalescing here
+    //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
+    // o: also you can destructure this
+    const genie = this.props.genie ?? {}
 
     return (
       // AN Edit: Centering and adding temp styling
@@ -42,20 +45,20 @@ class SingleGenieComponent extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapState = (state) => {
   return {
     genie: state.genie,
-  };
-};
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
-  };
-};
+  }
+}
 
-export default connect(mapState, mapDispatch)(SingleGenieComponent);
+export default connect(mapState, mapDispatch)(SingleGenieComponent)

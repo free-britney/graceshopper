@@ -26,6 +26,8 @@ export class AllGenies extends React.Component {
 
         <div className="container">
           <div className="row row-cols-1 row-cols-md-2 g-4">
+            {/* o: in what case is genies undefined? */}
+            {/*   you can likely remove this, but please test to see if it still occurs */}
             {genies.length === 0 || genies === undefined ? (
               <div className="card">
                 <div className="card-body">

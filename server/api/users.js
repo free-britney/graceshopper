@@ -2,6 +2,8 @@ const router = require('express').Router()
 const { models: { User }} = require('../db')
 module.exports = router
 
+// o: can you identify the security hole here
+//  add gatekeeping middleware for isLoggedIn, isAdmin
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({

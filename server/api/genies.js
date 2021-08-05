@@ -17,6 +17,7 @@ router.get("/", async (req, res, next) => {
 // EH Edit - this is the route to serve up single genies
 router.get('/:genieId', async (req, res, next) => {
   try {
+    // o: make sure to only send data when genie exists
     const singleGenie = await Genie.findByPk(req.params.genieId)
     res.json(singleGenie);
   } catch(error) {

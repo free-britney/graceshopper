@@ -26,6 +26,9 @@ const AuthForm = props => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
+        {/* o: you can use optional chaining here */}
+        {/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining */}
+        {/* error?.response?.data */}
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
