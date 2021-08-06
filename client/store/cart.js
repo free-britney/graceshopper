@@ -2,7 +2,8 @@ import axios from "axios";
 import history from "../history";
 
 //Actions for Adding/editing , deleting product and clearing cart after done
-
+const GET_CART = 'GET_CART'
+const ADD_TO_CART = 'ADD_TO_CART'
 const EDIT_CART = "EDIT_CART";
 const CLEAR_CART = "CLEAR_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
@@ -10,6 +11,10 @@ const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 const TOKEN = "TOKEN";
 
 //Action creators for Adding/editing , deleting product and clearing
+const addToCart = (product) => ({
+  type: ADD_TO_CART,
+  product
+})
 const editCart = (item) => {
   return {
     type: EDIT_CART,
@@ -29,6 +34,10 @@ const clearCart = (cart) => {
     cart,
   };
 };
+const getCart = (cart) => ({
+  type: GET_CART,
+  cart
+})
 
 //Thunk Creators
 export const updateCart = (genieId, quantity) => async (dispatch) => {
@@ -85,9 +94,22 @@ export const deleteCart = (id) => async (dispatch) => {
     console.error(error);
   }
 };
+export const fetchCart = (userId) => {
+  return async (dispatch) => {
+      try {
+        const { data } = await axios.get(`/api/cart/${userId}`)
+        dispatch(getCart(data))
+      } catch (err) {
+          console.error(err)
+      }
+  }
+}
+
 
 export default function cartReducer(state = { order: {}, genies: [] }, action) {
   switch (action.type) {
+    case ADD_TO_CART:
+      return [...state,action.genie]
     case EDIT_CART:
       return state.genies.map((genie) => {
         if (genie.id === action.item.genieId) {
