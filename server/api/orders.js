@@ -13,11 +13,12 @@ const Genie = require("../db/models/Genie");
 //   }
 // });
 
+// users/2/cart - make a route 
 
-router.put('/', async (req, res, next) => {
+router.post('/:id/orders', async (req, res, next) => {
   try {
-      const newGenie = await Genie.findByPk(req.body.genieId)
-      res.json(newGenie)
+      const newOrder = await Order.create(req.body.genieId)
+      res.json(newOrder)
   } catch (err) {
     next(err)
   }

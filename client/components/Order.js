@@ -3,16 +3,20 @@ import { connect } from "react-redux";
 import { addToOrder } from "../store/orders";
 
 export class Order extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             name: ''
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     this.props.addToOrder(this.props.genieId);
   }
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
   render() {
     const { genie } = this.props.genie;
     console.log(genie);

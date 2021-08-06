@@ -10,8 +10,8 @@ class SingleGenieComponent extends React.Component {
     this.props.loadSingleGenie(this.props.match.params.genieId);
   }
 
-  handleClick = (genieId) => {
-    this.props.addToOrder(genieId);
+  handleClick = (userId, genieId) => {
+    this.props.addToOrder(userId, genieId);
     alert("Added to Cart!");
    }
 
@@ -42,7 +42,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
-    addToOrder: (genieId) => dispatch(addToOrder(genieId)) 
+    addToOrder: (userId, genieId) => dispatch(addToOrder(userId, genieId)) 
   }
 }
 

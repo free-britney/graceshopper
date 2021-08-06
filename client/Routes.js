@@ -29,7 +29,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
-            <Route exact path="/orders" component={Order} />
+            <Route exact path="/:userId/orders" component={Order} />
             <Route exact path="/genies/:genieId" component={SingleGenieComponent} />
             <Redirect to="/home" />
           </Switch>

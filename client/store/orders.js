@@ -3,7 +3,7 @@ import axios from 'axios';
 const initialState = [];
 
 const ADD_GENIE_TO_ORDER = "ADD_GENIE_TO_ORDER";
-// users/2/cart - make a route 
+// users/2/orders - make a route 
 // cart for user id 
 
 
@@ -18,8 +18,8 @@ export const addGenieToOrder = (genie) => {
 export const addToOrder = (genieId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/orders', {genieId});
-      console.log("this is the data!" , data);
+      const { data } = await axios.post(`/api/${state.userId}/orders`, {genieId});
+      console.log("this is the data" , data);
       dispatch(addGenieToOrder(data));
     } catch (err) {
       console.log(err);
