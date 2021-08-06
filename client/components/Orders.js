@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/orders";
 
-
 export class Orders extends Component {
   constructor(props) {
     super(props)
@@ -12,7 +11,8 @@ export class Orders extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
-    this.props.loadOrder(this.props.match.params)
+    let orderId = this.props.match.params.id
+    this.props.loadOrder(orderId)
   }
 
   handleSubmit(evt){
@@ -20,7 +20,7 @@ export class Orders extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>Orders</div>
     )

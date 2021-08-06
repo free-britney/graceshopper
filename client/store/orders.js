@@ -20,7 +20,8 @@ export const getOrder = (order) => {
   }
 }
 
-//thunk creator
+//thunk creators
+//add to cart
 export const addToOrder = (genieId) => {
   return async (dispatch) => {
     try {
@@ -32,6 +33,7 @@ export const addToOrder = (genieId) => {
   }
 }
 
+//retrieve order in cart
 export const fetchOrder = (orderId) => {
   return async (dispatch) => {
     try {
