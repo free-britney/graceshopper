@@ -45,7 +45,7 @@ class Routes extends Component {
             <Route exact path="/genies/:genieId"
               component={SingleGenieComponent}
             />
-            {/* <Route path="/orders" component={Orders} /> */}
+            <Route path="/orders" component={Orders} />
           </Switch>
         )}
       </div>
