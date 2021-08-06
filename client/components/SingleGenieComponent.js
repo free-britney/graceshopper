@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleGenie } from "../store/singleGenieRedux";
-import { Link } from "react-router-dom";
 
 class SingleGenieComponent extends React.Component {
   componentDidMount() {
