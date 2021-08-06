@@ -9,9 +9,6 @@ const Order = require("./models/Order");
 
 //associations could go here!
 
-// FL Note: Changed the name of the through table for clarity
-// FL Note: Created a Cart in the database -- let me know if you have any questions on this.
-
 Genie.belongsToMany(Order, { through: "OrderGenies" });
 Order.belongsToMany(Genie, { through: "OrderGenies" });
 

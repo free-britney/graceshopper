@@ -18,7 +18,7 @@ export const addGenieToOrder = (genie) => {
 export const addToOrder = (genieId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/orders', genieId);
+      const { data } = await axios.put('/api/orders', {genieId});
       console.log("this is the data!" , data);
       dispatch(addGenieToOrder(data));
     } catch (err) {
@@ -30,7 +30,7 @@ export const addToOrder = (genieId) => {
 export default function orderReducer(state = initialState, action) {
     switch (action.type) {
       case ADD_GENIE_TO_ORDER:
-        return [...state, action.genie];
+          return [...state, action.genie];
       default:
         return state;
     }

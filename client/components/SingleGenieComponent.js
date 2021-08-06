@@ -42,7 +42,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
-    addToOrder: (genieId) => dispatch(addToOrder(genieId))
+    addToOrder: (genieId) => dispatch(addToOrder(genieId)) 
   }
 }
 
