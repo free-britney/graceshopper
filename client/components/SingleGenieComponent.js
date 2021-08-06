@@ -1,11 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleGenie } from "../store/singleGenieRedux";
-import { Link } from "react-router-dom";
+import { addToOrder } from "../store/orders"
 
 class SingleGenieComponent extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
   componentDidMount() {
     this.props.loadSingleGenie(this.props.match.params.genieId);
+  }
+
+  handleClick(genieId){
+    this.props.addToOrder(genieId)
+    alert("Added to cart!")
   }
 
   render() {
@@ -34,9 +46,7 @@ class SingleGenieComponent extends React.Component {
               </h3>
               <h4 className="card-title text-center">
                 {/* AN Note: This is currently a non-functioning button*/}
-                <button type="button" className="btn-danger btg-lg">
-                  Add to Cart
-                </button>
+                <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button>
               </h4>
             </div>
           </div>
@@ -55,6 +65,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
+    addToOrder: (genieId)  => dispatch(addToOrder(genieId))
   };
 };
 

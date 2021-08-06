@@ -14,9 +14,11 @@ const User = db.define("user", {
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   adminStatus: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   address: {
     type: Sequelize.TEXT,
@@ -61,11 +63,17 @@ User.authenticate = async function ({ username, password }) {
 
 User.findByToken = async function (token) {
   try {
+    // console.log(token)
     const { id } = await jwt.verify(token, process.env.JWT);
-    const user = User.findByPk(id);
+    // console.log(id)
+    const user = await User.findByPk(id);
+    // console.log(user)
     if (!user) {
       throw "nooo";
     }
+    // console.log("in findByToken")
+    // console.log("it should work!!!")
+    // Promise { <pending> } in browser
     return user;
   } catch (ex) {
     const error = Error("bad token");

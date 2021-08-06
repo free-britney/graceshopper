@@ -6,7 +6,7 @@ const Order = db.define("order", {
     type: Sequelize.INTEGER,
   },
   totalAmount: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
   },
   orderStatus: {
     type: Sequelize.ENUM("pending", "purchased"),

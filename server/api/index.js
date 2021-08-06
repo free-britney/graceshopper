@@ -4,6 +4,8 @@ module.exports = router;
 router.use("/users", require("./users"));
 // AN Edit - Creating Router for Genies
 router.use("/genies", require("./genies"));
+router.use("/admin", require("./admin"));
+router.use("/orders", require("./orders"))
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
