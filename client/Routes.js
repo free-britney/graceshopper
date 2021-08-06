@@ -7,6 +7,7 @@ import SingleGenieComponent from "./components/SingleGenieComponent";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
+import { Orders } from "./components/Orders";
 
 /**
  * COMPONENT
@@ -40,6 +41,11 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/genies" component={AllGenies} />
+            <Route exact path="/genies/:genieId"
+              component={SingleGenieComponent}
+            />
+            {/* <Route path="/orders" component={Orders} /> */}
           </Switch>
         )}
       </div>

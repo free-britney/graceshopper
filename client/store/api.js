@@ -5,25 +5,25 @@ const TOKEN = 'token'
 /**
  * ACTION TYPES
  */
-const SET_API = 'SET_API'
+const SET_ADMIN = 'SET_ADMIN'
 
 /**
  * ACTION CREATORS
  */
-const setApi = api => ({type: SET_API, api})
+const setAdmin = admin => ({type: SET_ADMIN, admin})
 
 /**
  * THUNK CREATORS
  */
-export const api = () => async dispatch => {
+export const admin = () => async dispatch => {
   const token = window.localStorage.getItem(TOKEN)
   if (token) {
-    const res = await axios.get('/api/users', {
+    const res = await axios.get('/api/admin', {
       headers: {
         authorization: token //essentially add this to every thunk route that we want hidden behind an authorization
       }
     })
-    return dispatch(setApi(res.data))
+    return dispatch(setAdmin(res.data))
   }
 }
 
@@ -32,8 +32,8 @@ export const api = () => async dispatch => {
  */
 export default function(state = {}, action) {
   switch (action.type) {
-    case SET_API:
-      return action.api
+    case SET_ADMIN:
+      return action.admin
     default:
       return state
   }
