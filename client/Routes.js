@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 // AN Edit: Importing All Genies Component
 import AllGenies from "./components/AllGenies";
-import SingleGenieComponent from "./components/SingleGenieComponent"
+import SingleGenieComponent from "./components/SingleGenieComponent";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
+import { Orders } from "./components/Orders";
 
 /**
  * COMPONENT
@@ -26,9 +27,14 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path="/orders" component={Orders} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
-            <Route exact path="/genies/:genieId" component={SingleGenieComponent} />
+            <Route
+              exact
+              path="/genies/:genieId"
+              component={SingleGenieComponent}
+            />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -36,6 +42,14 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/genies" component={AllGenies} />
+            <Route
+              exact
+              path="/genies/:genieId"
+              component={SingleGenieComponent}
+            />
+            {/* AN Note: I think that the cart route should be /orders/:orderId */}
+
           </Switch>
         )}
       </div>
