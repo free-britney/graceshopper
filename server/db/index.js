@@ -9,8 +9,8 @@ const Order = require("./models/Order");
 
 //associations could go here!
 
-Genie.belongsToMany(Order, { through: "OrderGenies" });
-Order.belongsToMany(Genie, { through: "OrderGenies" });
+Genie.belongsToMany(Order, { through: "Orderline" });
+Order.belongsToMany(Genie, { through: "Orderline" });
 
 Order.belongsTo(User);
 User.hasMany(Order);

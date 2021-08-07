@@ -14,7 +14,7 @@ class Orders extends Component {
     // However, if they do not and it's a guest cart, retrieve based on orderId (whick we should save somehow in local storage).
     // let orderId = this.props.match.params.id;
     // console.log("these are the props!" , this.props);
-    this.props.fetchOrder(this.props.match.params.id);
+    this.props.fetchOrder(this.props.order.id);
   }
   
   handleSubmit(evt) {
