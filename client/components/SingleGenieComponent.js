@@ -12,10 +12,6 @@ class SingleGenieComponent extends React.Component {
   componentDidMount() {
     this.props.loadSingleGenie(this.props.match.params.genieId);
   }
-  handleClick = (genieId) => {
-    this.props.addToCart(genieId);
-    alert("Added to Cart!");
-   }
 
   handleClick(genieId) {
     this.props.addToOrder(genieId);

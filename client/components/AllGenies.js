@@ -45,6 +45,7 @@ export class AllGenies extends React.Component {
                 <div key={genie.id} className="col">
                   <img
                     src={genie.imageURL}
+
                     className="img-fluid rounded-start card-img-top"
                   />
                   <div className="card bg-warning border-dark text-light">

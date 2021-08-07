@@ -28,76 +28,77 @@ class Cart extends Component {
       this.props.getCart(this.props.userId);
     }
   }
-  handleAdd(evt, genie) {
+  handleAdd(evt, order) {
     this.setState((state) => {
-      const genies = state.genies;
-      let genieInCart = false;
-      genies.forEach((item) => {
-        if (item.id === genie.id) {
-          genieInCart = true;
+      const orders = state.orders;
+      let orderInCart = false;
+      orders.forEach((item) => {
+        if (item.id === order.id) {
+          orderInCart = true;
           item.inventory++;
         }
       });
-      if (!genieInCart) {
-        genieInCart.push({ ...genies, inventory: 1 });
+      if (!orderInCart) {
+        orderInCart.push({ ...orders, inventory: 1 });
       }
-      localStorage.setItem("guestCart", JSON.stringify(genieInCart));
+      localStorage.setItem("guestCart", JSON.stringify(orderInCart));
     });
   }
 
-  handleSubtract(evt, genie) {
+  handleSubtract(evt, order) {
     this.setState((state) => {
-      const genies = state.genies;
-      let genieInCart = false;
-      genies.forEach((item) => {
-        if (item.id === genie.id) {
-          genieInCart = true;
+      const orders = state.orders;
+      let orderInCart = false;
+      orders.forEach((item) => {
+        if (item.id === order.id) {
+          orderInCart = true;
           item.inventory--;
         }
       });
-      if (!genieInCart) {
-        genieInCart.push({ ...genies, inventory: 1 });
+      if (!orderInCart) {
+        orderInCart.push({ ...orders, inventory: 1 });
       }
-      localStorage.setItem("guestCart", JSON.stringify(genieInCart));
+      localStorage.setItem("guestCart", JSON.stringify(orderInCart));
     });
   }
 
 
-  handleDelete(evt, genie) {
+  handleDelete(evt, order) {
     this.setState((state) => {
-      let updatedCart = state.genies.filter((ele) => ele.id !== genie.id);
+      let updatedCart = state.orders.filter((ele) => ele.id !== order.id);
       localStorage.setItem("guestCart", updatedCart);
       return { updatedCart };
     });
   }
 
   render() {
-    const { genies } = this.props;
+    const { orders } = this.props;
+    console.log("orders",orders)
     return (
       <div>
         <div className="alert">
-          {genies.length === 0 ? (
+          {orders.length === 0 ? (
             " Cart is Empty"
           ) : (
-            <div> You have {genies.length} products,</div>
+            <div> You have {orders.length} products,</div>
           )}
-          {genies.length > 0 && (
+          {orders.length > 0 && (
             <div>
               <ul>
-                {genies.map((genie) => (
-                  <li className="genie" key={genie.Id || genie.genieId}>
-                    <b>{genie.name}</b>X{genie.inventory}
+                {orders.map((order) => (
+                  <li className="order" key={order.Id || order.orderId}>
+                    <b>{order.name}</b>X{order.inventory}
                     <button
                       className="Remove"
-                      onClick={(e) => this.props.handleDelete(e, genie)}
+                      onClick={(e) => this.props.handleDelete(e, order)}
                     >
                       X
                     </button>
                     <div>
-                      {genies.inventory<= 10}
+                      {orders.inventory<= 10}
                         <button
                       className="Add"
-                      onClick={(e) => this.props.handleAdd(e, genie)}
+                      onClick={(e) => this.props.handleAdd(e, order)}
                     >
                       +
                     </button>
@@ -106,7 +107,7 @@ class Cart extends Component {
 
                     <button
                       className="Less"
-                      onClick={(e) => this.props.handleSubtract(e, genie)}
+                      onClick={(e) => this.props.handleSubtract(e, order)}
                     >
                       -
                     </button>
@@ -126,9 +127,9 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  addToCart: (genieId) => dispatch(addToCart(genieId)),
-  updatedQty: (genieId, quantity) =>
-    dispatch(updateCart(genieId, quantity)),
+  addToCart: (orderId) => dispatch(addToCart(orderId)),
+  updatedQty: (orderId, quantity) =>
+    dispatch(updateCart(orderId, quantity)),
   deleteFromCart: (id) => dispatch(deleteCart(id)),
 });
 
