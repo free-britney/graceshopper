@@ -3,7 +3,7 @@ const { Order } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
-    const data = await Order.findByPk(req.body.id);
+    const data = await Order.findByPk(req.body.orderId);
     res.json(data);
   } catch (error) {
     next(error);

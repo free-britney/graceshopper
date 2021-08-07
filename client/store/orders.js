@@ -51,7 +51,7 @@ export default function ordersReducer(state = initialState, action) {
     case ADD_GENIE_TO_ORDER:
       return action.genie;
     case GET_ORDER:
-      return action.order;
+      return {...state, order: action.order};
     default:
       return state;
   }

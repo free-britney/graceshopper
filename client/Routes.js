@@ -27,6 +27,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route exact path="/orders" component={Orders} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
             <Route
@@ -48,7 +49,7 @@ class Routes extends Component {
               component={SingleGenieComponent}
             />
             {/* AN Note: I think that the cart route should be /orders/:orderId */}
-            <Route path="/orders" component={Orders} />
+            {/* <Route exact path="/orders" component={Orders} /> */}
           </Switch>
         )}
       </div>

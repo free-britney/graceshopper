@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/orders";
 
-export class Orders extends Component {
+class Orders extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -12,7 +12,8 @@ export class Orders extends Component {
     // AN Note: I think the strategy here should be if the orderId exists (aka a user is logged in), retrieve the cart based on their userId.
     // However, if they do not and it's a guest cart, retrieve based on orderId (whick we should save somehow in local storage).
     let orderId = this.props.match.params.id;
-    this.props.loadOrder(orderId);
+    console.log(this.props);
+    this.props.fetchOrder(orderId);
   }
 
   handleSubmit(evt) {
@@ -21,7 +22,9 @@ export class Orders extends Component {
 
   render() {
     console.log(this.props);
-    return <div>Orders</div>;
+    return (
+    <div>Orders</div>
+    )
   }
 }
 
@@ -31,11 +34,10 @@ const mapState = (state) => {
     userId: state.auth.id,
   };
 };
-
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadOrder: (id) => dispatch(fetchOrder(id)),
-  };
-};
+    fetchOrder: (orderId) => {dispatch(fetchOrder(orderId))}
+  }
+}
 
-export default connect(mapState, mapDispatch)(Orders);
+export default connect(mapState, mapDispatchToProps)(Orders);
