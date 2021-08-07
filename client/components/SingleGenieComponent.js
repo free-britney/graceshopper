@@ -16,7 +16,7 @@ class SingleGenieComponent extends React.Component {
    }
 
   render() {
-    const genie  = this.props.genie || {}
+    const genie = this.props.genie || {};
 
     return (
       <div>
@@ -29,15 +29,15 @@ class SingleGenieComponent extends React.Component {
         <h3>Genie ability: {genie.ability}</h3>
         <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button>
       </div>
-    )
+    );
   }
 }
 
 const mapState = (state) => {
   return {
-    genie: state.genie
-  }
-}
+    genie: state.genie,
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {
