@@ -15,6 +15,7 @@ Order.belongsToMany(Genie, { through: "Orderline" });
 Order.belongsTo(User);
 User.hasMany(Order);
 
+
 module.exports = {
   db,
   Genie,

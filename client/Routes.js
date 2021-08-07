@@ -7,7 +7,7 @@ import SingleGenieComponent from "./components/SingleGenieComponent";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
-import { Orders } from "./components/Orders";
+import Orders  from "./components/Orders";
 
 /**
  * COMPONENT
@@ -27,6 +27,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+            <Route path="/orders" component={Orders} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
             <Route
