@@ -8,9 +8,6 @@ const Order = db.define("order", {
   orderStatus: {
     type: Sequelize.ENUM("pending", "purchased"),
     defaultValue: "pending",
-  },
-  isCart: {
-    type: Sequelize.BOOLEAN,
   }
 });
 

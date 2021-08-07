@@ -6,9 +6,8 @@ import AllGenies from "./components/AllGenies";
 import SingleGenieComponent from "./components/SingleGenieComponent";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
-import Order from "./components/Order";
 import { me } from "./store";
-import { Orders } from "./components/Orders";
+import Orders  from "./components/Orders";
 
 /**
  * COMPONENT
@@ -50,7 +49,7 @@ class Routes extends Component {
               component={SingleGenieComponent}
             />
             {/* AN Note: I think that the cart route should be /orders/:orderId */}
-            {/* <Route path="/orders" component={Orders} /> */}
+            <Route path="/orders" component={Orders} />
           </Switch>
         )}
       </div>
