@@ -4,7 +4,7 @@ import history from "../history";
 //Actions for Adding/editing , deleting product and clearing cart after done
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
-const EDIT_CART = "EDIT_CART";
+const DELETE_QUANTIY = "DELETE_QUANTIY";
 const CLEAR_CART = "CLEAR_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 //Token for authorisation as user can only edit their cart
@@ -15,16 +15,16 @@ const addToCart = (product) => ({
   type: ADD_TO_CART,
   product
 })
-const editCart = (item) => {
+const deleteQuantity = (item) => {
   return {
-    type: EDIT_CART,
+    type: DELETE_QUANTIY,
     item,
   };
 };
-const deleteFromCart = (id) => {
+const deleteFromCart = (genie) => {
   return {
     type: REMOVE_FROM_CART,
-    id,
+    genie,
   };
 };
 
@@ -40,51 +40,43 @@ const getCart = (cart) => ({
 })
 
 //Thunk Creators
-export const updateCart = (genieId, quantity) => async (dispatch) => {
-  try {
-    const token = window.localStorage.getItem("token");
-    if (token) {
-      const { data: updated } = await axios.put(
-        `/api/cart/`,
-        { genieId, quantity },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      dispatch(editCart(updated));
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
+// export const updateCart = (genieId, userId,history) => async (dispatch) => {
+//   try {
+//     const {data} = await axios.delete(`/api/orders/${userId}/${genieId}`)
+//     dispatch(deleteFromCart(data));
+//     history.push('/')
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
-export const clearedCart = () => async (dispatch) => {
-  try {
-    const token = window.localStorage.getItem(TOKEN);
-    if (token) {
-      await axios.put(`/api/cart/purchased`, {
-        headers: {
-          authorization: token,
-        },
-      });
-    }
-    dispatch(
-      clearCart({
-        order: {},
-        genies: [],
-      })
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
+
+
+// export const clearedCart = () => async (dispatch) => {
+//   try {
+//     const token = window.localStorage.getItem(TOKEN);
+//     if (token) {
+//       await axios.put(`/api/cart/purchased`, {
+//         headers: {
+//           authorization: token,
+//         },
+//       });
+//     }
+//     dispatch(
+//       clearCart({
+//         order: {},
+//         genies: [],
+//       })
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 export const deleteCart = (id) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem("token");
-    await axios.delete(`/api/cart/genie/$id`, {
+    await axios.delete(`/api/orders/genie/$id`, {
       headers: {
         authorization: token,
       },
@@ -105,26 +97,44 @@ export const fetchCart = (userId) => {
   }
 }
 
+export const removeQuantity = (genieObj,history)=> {
+  return async(dispatch) => {
+    try {
+      const userId = {
+        id: genieObj[0]
+      }
+      const qty = {
+        type: genieObj[2]
+      }
+      const {data} = await axios.post(`/api/orders/`, [userId, genieObj[1],qty])
+      dispatch(deleteQuantity(data));
+      history.push(`/`)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 
-export default function cartReducer(state = { order: {}, genies: [] }, action) {
+
+export default function cartReducer(state =  [] , action) {
   switch (action.type) {
     case ADD_TO_CART:
       return [...state,action.genie]
-    case EDIT_CART:
+    case DELETE_QUANTIY:
+    if(state.length !== 0)
       return state.genies.map((genie) => {
-        if (genie.id === action.item.genieId) {
-          genie.order_items.quantity = action.item.quantity;
-        }
-        return genie;
-      });
+        if (genie.orderGenie.genieId === action.genie.id && genie.orderGenie >1) {
+          genie.orderGenie.quantity = action.orderGenie.quantity;
+        }return genie;
+      })
     case REMOVE_FROM_CART:
-      return {
-        ...state,
-        genies: [...state.genies].filter(
-          (genie) => genie.id !== action.genieId
-        ),
-      };
-  case CLEAR_CART:
+      const updatedCart = state.genies.filter((genie)=>{
+        return genie.orderGenie.genieId !== action.genieId
+      });
+      const newState = {...state}
+      newState.genies = updatedCart;
+       return newState
+    case CLEAR_CART:
     return action.cart;
   default:
     return state;
