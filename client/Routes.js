@@ -42,9 +42,12 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/genies" component={AllGenies} />
-            <Route exact path="/genies/:genieId"
+            <Route
+              exact
+              path="/genies/:genieId"
               component={SingleGenieComponent}
             />
+            {/* AN Note: I think that the cart route should be /orders/:orderId */}
             <Route path="/orders" component={Orders} />
           </Switch>
         )}

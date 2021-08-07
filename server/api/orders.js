@@ -1,22 +1,22 @@
-const router = require('express').Router()
-const { Order } = require('../db')
+const router = require("express").Router();
+const { Order } = require("../db");
 
-router.get('/', async(req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const data = await Order.findByPk(req.body.id)
-    res.json(data)
+    const data = await Order.findByPk(req.body.id);
+    res.json(data);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-router.post('/', async(req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    const newOrder = await Order.create(req.body)
-    res.json(newOrder)
+    const newOrder = await Order.create(req.body);
+    res.json(newOrder);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-module.exports = router
+module.exports = router;
