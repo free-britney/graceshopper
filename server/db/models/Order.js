@@ -8,7 +8,7 @@ const Order = db.define("order", {
   orderStatus: {
     type: Sequelize.ENUM("pending", "purchased"),
     defaultValue: "pending",
-  }
+  },
 });
 
 module.exports = Order;
