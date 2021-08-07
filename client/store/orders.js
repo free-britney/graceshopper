@@ -1,38 +1,58 @@
-import axios from 'axios';
+import axios from "axios";
+const initialState = {};
 
-const initialState = [];
-
+//action type
 const ADD_GENIE_TO_ORDER = "ADD_GENIE_TO_ORDER";
-// users/2/orders - make a route 
-// cart for user id 
+const GET_ORDER = "GET_ORDER";
 
-
+//action creator
 export const addGenieToOrder = (genie) => {
-    return {
-      type: ADD_GENIE_TO_ORDER,
-      genie,
-    };
+  return {
+    type: ADD_GENIE_TO_ORDER,
+    genie,
   };
+};
 
+export const getOrder = (order) => {
+  return {
+    type: GET_ORDER,
+    order,
+  };
+};
 
+//thunk creators
+//add to cart
 export const addToOrder = (genieId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/${state.userId}/orders`, {genieId});
-      console.log("this is the data" , data);
+      const { data } = await axios.post("/api/orders", { genieId });
       dispatch(addGenieToOrder(data));
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
+  };
+};
+
+//retrieve order in cart
+export const fetchOrder = (orderId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get("/api/orders", { orderId });
+      dispatch(getOrder(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+//reducer
+export default function ordersReducer(state = initialState, action) {
+  switch (action.type) {
+    case ADD_GENIE_TO_ORDER:
+      return action.genie;
+    case GET_ORDER:
+      return action.order;
+    default:
+      return state;
   }
 }
-
-export default function orderReducer(state = initialState, action) {
-    switch (action.type) {
-      case ADD_GENIE_TO_ORDER:
-          return [...state, action.genie];
-      default:
-        return state;
-    }
-  }
-  

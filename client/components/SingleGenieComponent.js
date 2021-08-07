@@ -1,33 +1,60 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchSingleGenie } from '../store/singleGenieRedux';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchSingleGenie } from "../store/singleGenieRedux";
 import { addToOrder } from "../store/orders";
 
-
 class SingleGenieComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
   componentDidMount() {
     this.props.loadSingleGenie(this.props.match.params.genieId);
   }
 
-  handleClick = (userId, genieId) => {
-    this.props.addToOrder(userId, genieId);
-    alert("Added to Cart!");
-   }
+  handleClick(genieId) {
+    this.props.addToOrder(genieId);
+    alert("Added to cart!");
+  }
 
   render() {
     const genie = this.props.genie || {};
-
+    // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
+    const { userId } = this.props;
     return (
-      <div>
-        <h1>Name: {genie.name}</h1>
-        <h2>Price: {genie.price}</h2>
-        <img src={genie.imageURL} />
-        <h4>Description: {genie.description}</h4>
-        <h3>Wish Quantity: {genie.wishQty}</h3>
-        <h3>In stock: {genie.inventory}</h3>
-        <h3>Genie ability: {genie.ability}</h3>
-        <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button>
+      // AN Edit: Centering and adding temp styling
+      <div className="container">
+        <div className="card mb-3 card-body bg-warning">
+          <div className="row g-0 align-items-center">
+            <h1 className="card-title text-center">Name: {genie.name}</h1>
+            <h2 className="card-title text-center">Price: {genie.price}</h2>
+            <img src={genie.imageURL} className="img-fluid rounded" />
+            <div className="card-body">
+              <h4 className="card-title text-center">
+                Description: {genie.description}
+              </h4>
+              <h3 className="card-title text-center">
+                Wish Quantity: {genie.wishQty}
+              </h3>
+              <h3 className="card-title text-center">
+                In stock: {genie.inventory}
+              </h3>
+              <h3 className="card-title text-center">
+                Genie ability: {genie.ability}
+              </h3>
+              <h4 className="card-title text-center">
+                {/* AN Note: This is currently a non-functioning button*/}
+                <button
+                  type="submit"
+                  onClick={() => this.handleClick(genie.id)}
+                >
+                  Add To Cart
+                </button>
+              </h4>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -36,14 +63,16 @@ class SingleGenieComponent extends React.Component {
 const mapState = (state) => {
   return {
     genie: state.genie,
+    // AN Note: Mapping userid to state so we have access to it.
+    userId: state.auth.id,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
-    addToOrder: (userId, genieId) => dispatch(addToOrder(userId, genieId)) 
-  }
-}
+    addToOrder: (genieId) => dispatch(addToOrder(genieId)),
+  };
+};
 
 export default connect(mapState, mapDispatch)(SingleGenieComponent);
