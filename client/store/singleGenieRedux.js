@@ -21,6 +21,7 @@ export const setSingleGenie = (genie) => {
  * THUNK CREATORS
  */
 export const fetchSingleGenie = (genieId) => {
+  // console.log("genie Id" , genieId);
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/genies/${genieId}`);
@@ -30,6 +31,7 @@ export const fetchSingleGenie = (genieId) => {
     }
   }
 }
+
 
 /**
  * REDUCER
