@@ -20,52 +20,8 @@ import { fetchOrder } from "../store/orders";
   }
 
   render() {
-    const { genies } = this.props;
-    return (
-      <div>
-        <div className="alert">
-          {genies.length === 0 ? (
-            " Cart is Empty"
-          ) : (
-            <div> You have {genies.length} products,</div>
-          )}
-          {genies.length > 0 && (
-            <div>
-              <ul>
-                {genies.map((genie) => (
-                  <li className="genie" key={genie.Id || genie.genieId}>
-                    <b>{genie.name}</b>X{genie.inventory}
-                    <button
-                      className="Remove"
-                      onClick={(e) => this.props.handleDelete(e, genie)}
-                    >
-                      X
-                    </button>
-                    <div>
-                      {genies.inventory<= 10}
-                        <button
-                      className="Add"
-                      onClick={(e) => this.props.handleAdd(e, genie)}
-                    >
-                      +
-                    </button>
-
-                    </div>
-
-                    <button
-                      className="Less"
-                      onClick={(e) => this.props.handleSubtract(e, genie)}
-                    >
-                      -
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-    );
+    console.log(this.props);
+    return <div>Orders</div>;
   }
 }
 
