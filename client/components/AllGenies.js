@@ -21,10 +21,9 @@ export class AllGenies extends React.Component {
   //   this.props.addToOrder(genieId);
   //   alert("Added to Cart!");
   //  }
-  render() {
-    // Assigned a new variable, genies, to this.props.genies.
-    const genies = this.props.genies;
-    console.log(genies);
+   render() {
+     // Assigned a new variable, genies, to this.props.genies.
+     const genies = this.props.genies;
     return (
       <div className="container">
         <div className="d-sm-flex justify-content-between align-items-center">
