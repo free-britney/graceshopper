@@ -59,7 +59,7 @@ export const fetchOrder = (orderId) => {
     }
   };
 };
-export const deleteGenie = (id,name) => {
+export const deleteGenie = (id) => {
   return async (dispatch) => {
     try {
       const {data}= await axios.delete(`/api/orders/genie/${id}`);

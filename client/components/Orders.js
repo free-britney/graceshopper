@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchOrder,deleteGenie,editQuantity, addGenieToOrder, } from "../store/orders";
 import axios from "axios";
 
@@ -40,18 +41,16 @@ class Orders extends Component {
       console.log("props", this.props);
     } else {
       let existingCart = JSON.parse(localStorage.getItem("Cart"));
-      let truthy;
       let id = Number(evt.target.id);
       if (!existingCart) {
         existingCart = [];
         localStorage.setItem("Cart", JSON.stringify(existingCart));
       } else {
-        //here it maps through the elements in the current cart, if it finds one it iterates the quantity
+        // maps through the elements in the current cart, and increments by 1
         existingCart.map((genie) => {
           if (genie.id === id) {
             genie.wishQty++;
-            truthy = true;
-            return truthy;
+
           }
         });
       }
@@ -60,23 +59,14 @@ class Orders extends Component {
     }
   }
   async handleSubtract(evt) {
-    evt.persist();
-    if (this.props.userId) {
-      const lessQty = evt.target.value;
-      const { data } = await axios.get(`/api/genies/${evt.target.id}`);
-      await this.props.lessQty([this.props.cart.userId, data, lessQty]);
-    } else {
+     {
       let existingCart = JSON.parse(localStorage.getItem("Cart"));
       let id = Number(evt.target.id);
-      if (!existingCart) {
-        existingCart = [];
-        localStorage.setItem("Cart", JSON.stringify(existingCart));
-      } else {
-        //here it maps through the elements in the ucrrent cart, if it finds one it iterates the quantity
+
         existingCart.map((genie) => {
           genie.id === id && genie.wishQty > 1 && genie.wishQty--;
         });
-      }
+
       this.setState({ cart: existingCart });
       localStorage.setItem("Cart", JSON.stringify(existingCart));
     }
@@ -89,8 +79,13 @@ class Orders extends Component {
   }
 
   render() {
+    const geniesInCart = this.props.cart.geneis
     const { cart } = this.state;
     console.log(cart);
+    const finalTotal = geniesInCart.reduce((total,genie)=>{
+      let subTotal = genie.wishQty*genie.price
+      return total+subTotal;
+    },0)
     return (
       <div className="container">
         <div className="d-sm-flex justify-content-between align-items-center">
@@ -119,10 +114,10 @@ class Orders extends Component {
                         <h4 className="card-title">{genie.name}</h4>
                         <button
                           onClick={() =>
-                            this.props.handleDelete(genie.id, genie.name)
+                            this.handleDelete(genie.id)
                           }
                         >
-                          X Remove
+                           Remove
                         </button>
 
                         <h6 className="card-text">
@@ -153,6 +148,7 @@ class Orders extends Component {
                             +
                           </button>
 
+
                           <div />
                         </h6>
                       </div>
@@ -161,6 +157,14 @@ class Orders extends Component {
                 </div>
               ))
             )}
+            <p>Total Amount: ${Number(finalTotal)}</p>
+                <div>
+                    <Link to={`/cart/checkout/`}>
+                        <button>
+                            Check Out
+                        </button>
+                    </Link>
+                </div>
           </div>
         </div>
         <div className="text-center">End of List</div>
@@ -179,7 +183,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchOrder: (orderId) => dispatch(fetchOrder(orderId)),
-    deleteGenie:(id,name) =>dispatch(deleteGenie(id,name)),
+    deleteGenie:(id) =>dispatch(deleteGenie(id)),
     addQty:(genie)=> dispatch(addGenieToOrder(genie)),
     lessQty:(genie) => dispatch(editQuantity(genie))
   };

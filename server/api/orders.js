@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Order } = require("../db");
+const { Order,Genie,User,Orderline } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -18,5 +18,4 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
-
 module.exports = router;

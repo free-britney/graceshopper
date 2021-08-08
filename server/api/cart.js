@@ -1,12 +1,52 @@
 const router = require("express").Router();
 const Sequelize = require("sequelize");
 const {
-  models: { Order, User, Genie },
+  models: { Order, User, Genie,Orderline, }
 } = require("../db");
+router.post("/", async (req, res, next) => {
+  try {
+    const userId = req.body[0].id;
+    const product = req.body[1];
+    const quantityType = req.body[2];
+
+    let currentOrder = await Order.findOne({
+      where: {
+        userId: userId,
+        status: "pending",
+      },
+    });
+    let user = await User.findByPk(userId);
+    if (!currentOrder) {
+      currentOrder = await Order.create();
+      user.addOrders(currentOrder);
+    } else {
+    let orderProduct = await Orderline.findOne({
+      where: {
+        orderId: currentOrder.id,
+        productId: product.id,
+      },
+    });
+    if (orderProduct && quantityType.type === "addQty") {
+      orderProduct.quantity++;
+      orderProduct.save();
+    } else if (
+      orderProduct &&
+      quantityType.type === "lessQty" &&
+      orderProduct.quantity >= 1) {
+      orderProduct.quantity--;
+      orderProduct.save();
+    }
+    let newProduct = await Genie.findByPk(product.id);
+    await currentOrder.addProducts(newProduct);
+    res.status(201).send(newProduct);
+  } } catch (err) {
+    next(err);
+  }
+});
 
 
 //PUT/api/cart
-router.put("/:uderId",  async (req,res,next)=> {
+router.put("/:id",  async (req,res,next)=> {
   try {
     if(req.user) {
       const order = await Order.findOne({
@@ -26,7 +66,7 @@ router.put("/:uderId",  async (req,res,next)=> {
   }
 })
 //route for deleting product
-router.delete('/:userId', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
