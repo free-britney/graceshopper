@@ -24,7 +24,7 @@ export class AllGenies extends React.Component {
    render() {
      // Assigned a new variable, genies, to this.props.genies.
      const genies = this.props.genies;
-     console.log(genies);
+    //  console.log(genies);
     return (
       <div className="container">
         <div className="d-sm-flex justify-content-between align-items-center">
