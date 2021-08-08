@@ -8,6 +8,7 @@ import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
 import Orders from "./components/Orders";
+import Admin from "./components/Admin"
 
 /**
  * COMPONENT
@@ -35,6 +36,7 @@ class Routes extends Component {
               path="/genies/:genieId"
               component={SingleGenieComponent}
             />
+            <Route path="/admin" component={Admin} />
             <Redirect to="/home" />
           </Switch>
         ) : (

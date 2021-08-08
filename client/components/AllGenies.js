@@ -24,7 +24,6 @@ export class AllGenies extends React.Component {
    render() {
      // Assigned a new variable, genies, to this.props.genies.
      const genies = this.props.genies;
-     console.log(genies);
     return (
       <div className="container">
         <div className="d-sm-flex justify-content-between align-items-center">
@@ -64,15 +63,14 @@ export class AllGenies extends React.Component {
                         <h6 className="card-text">
                           <span className="text-primary">Wish Quantity: </span>
                           {genie.wishQty}
-                          <div/>
-                          {/* <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button> */}
+                          <div />
                         </h6>
                       </div>
                     </div>
                   </div>
                 </div>
               ))
-              )}
+            )}
           </div>
         </div>
         <div className="text-center">End of List</div>

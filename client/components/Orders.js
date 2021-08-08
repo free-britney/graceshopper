@@ -11,8 +11,21 @@ class Orders extends Component {
     // If local storage cart exists, this.cart = local storage cart.
     // If it doesn't, set this.cart to an empty array.
     this.cart = JSON.parse(window.localStorage.getItem("Cart")) || [];
+    // AN Note: Creating a countMap to track qty of the cart.
+    this.cartMap = {};
+    this.cart.forEach((genie) => {
+      if (this.cartMap[genie.name]) {
+        this.cartMap[genie.name].qty += 1;
+      } else {
+        this.cartMap[genie.name] = { qty: 1, genieObject: genie };
+      }
+    });
+    this.startingKeyForMap = 1;
     this.state = { cart: this.cart };
+<<<<<<< HEAD
     // console.log(props);
+=======
+>>>>>>> 24cd2d0c1e9f9bac707696ccfaf2b3d4fb3350de
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubtract = this.handleSubtract(this);
     this.handleAdd = this.handleAdd.bind(this);
@@ -23,10 +36,14 @@ class Orders extends Component {
     // However, if they do not and it's a guest cart, retrieve based on orderId (whick we should save somehow in local storage).
     // let orderId = this.props.match.params.id;
     // console.log("these are the props!" , this.props);
+<<<<<<< HEAD
     // const cart = JSON.parse(window.localStorage.getItem("Cart")) || [];
     // this.setState = { cart: cart };
 
     this.props.fetchOrder(this.props.order.id);
+=======
+    // this.props.fetchOrder(this.props.order.id);
+>>>>>>> 24cd2d0c1e9f9bac707696ccfaf2b3d4fb3350de
   }
 
   handleSubmit(evt) {
@@ -79,6 +96,7 @@ class Orders extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     const geniesInCart = this.props.cart.geneis
     const { cart } = this.state;
     console.log(cart);
@@ -86,11 +104,17 @@ class Orders extends Component {
       let subTotal = genie.wishQty*genie.price
       return total+subTotal;
     },0)
+=======
+    // AN Note: Rendering cart into a table.
+    const { cart } = this.state;
+    let key = this.startingKeyForMap;
+>>>>>>> 24cd2d0c1e9f9bac707696ccfaf2b3d4fb3350de
     return (
       <div className="container">
         <div className="d-sm-flex justify-content-between align-items-center">
           <h2>Cart</h2>
         </div>
+<<<<<<< HEAD
         <div />
 
         <div className="container">
@@ -166,8 +190,53 @@ class Orders extends Component {
                     </Link>
                 </div>
           </div>
+=======
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Genie Name</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Price Per Item</th>
+              <th scope="col">Total Cost Per Line Item</th>
+              <th scope="col">Increase Qty</th>
+              <th scope="col">Decrease Qty</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(this.cartMap).map((item) => (
+              <tr key={key}>
+                <th scope="row">{key++}</th>
+                <td>{item}</td>
+                <td>{this.cartMap[item].qty}</td>
+                <td>{this.cartMap[item].genieObject.price / 100}</td>
+                <td>
+                  {(this.cartMap[item].genieObject.price / 100) *
+                    this.cartMap[item].qty}
+                </td>
+                <td>
+                  <div className="text-center">
+                    <button className="btn-danger btn-md">+</button>
+                  </div>
+                </td>
+                <td>
+                  <div className="text-center">
+                    <button className="btn-danger btn-md">-</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="text-center">
+          <span className="text-primary"> Total Amount Due: </span>
+          {cart.reduce((acc, currentVal) => acc + currentVal.price / 100, 0)}
         </div>
-        <div className="text-center">End of List</div>
+        <div className="text-center">
+          <button className="btn-danger btn-md">Checkout</button>
+>>>>>>> 24cd2d0c1e9f9bac707696ccfaf2b3d4fb3350de
+        </div>
+        <div></div>
       </div>
     );
   }
