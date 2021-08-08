@@ -5,6 +5,7 @@ const db = require("./db");
 const User = require("./models/User");
 const Genie = require("./models/Genie");
 const Order = require("./models/Order");
+const Orderline = require("./models/Orderline");
 // const { BelongsToMany } = require('sequelize/types')
 
 //associations could go here!
@@ -20,6 +21,7 @@ module.exports = {
   db,
   Genie,
   Order,
+  Orderline,
   // AN Note: Try not to touch User in this section so the already available auth section doesn't break.
   models: {
     User,

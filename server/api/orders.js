@@ -20,9 +20,10 @@ router.post("/", async (req, res, next) => {
   }
 });
 //PUT/api/cart
-router.put("/:uderId",  async (req,res,next)=> {
+router.put("/",  async (req,res,next)=> {
   try {
-    if(req.user) {
+   {
+
       const order = await Order.findOne({
         where: {
           [Sequelize.Op.and]: [{userId: req.params.userId},{orderStatus: 'pending'}],
@@ -40,7 +41,7 @@ router.put("/:uderId",  async (req,res,next)=> {
   }
 })
 //route for deleting product
-router.delete('/:userId', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {

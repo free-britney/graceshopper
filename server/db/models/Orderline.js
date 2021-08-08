@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Order_Genie = db.define('orderGenie', {
+const orderlines= db.define('orderlines', {
 
     quantity: {
         type: Sequelize.INTEGER,
@@ -13,4 +13,4 @@ const Order_Genie = db.define('orderGenie', {
 });
 
 
-module.exports = Order_Genie;
+module.exports = orderlines;
