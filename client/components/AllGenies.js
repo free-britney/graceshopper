@@ -63,15 +63,14 @@ export class AllGenies extends React.Component {
                         <h6 className="card-text">
                           <span className="text-primary">Wish Quantity: </span>
                           {genie.wishQty}
-                          <div/>
-                          {/* <button type="submit" onClick={() => this.handleClick(genie.id)}>Add To Cart</button> */}
+                          <div />
                         </h6>
                       </div>
                     </div>
                   </div>
                 </div>
               ))
-              )}
+            )}
           </div>
         </div>
         <div className="text-center">End of List</div>
