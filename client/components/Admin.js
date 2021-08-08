@@ -5,19 +5,23 @@ import { fetchUsers } from '../store/admin'
 class Admin extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {}
   }
   componentDidMount() {
     this.props.getUsers()
   }
 
   render() {
-    const users = this.props.users || []
-    // console.log("this is users", users)
+    const { users } = this.props || []
     return (
       <div>
-        Users
-        {users}
+        Users - admin view only
+        {users.map((user) => (
+          <div key={user.id}>
+            <div>{user.id}</div>
+            <div>{user.username}</div>
+            <br/ >
+          </div>
+        ))}
       </div>
     )
   }
@@ -25,8 +29,7 @@ class Admin extends React.Component {
 
 const mapState = (state) => {
   return {
-    // admin: state.admin,
-    users: state.users
+    users: state.admin
   }
 }
 
