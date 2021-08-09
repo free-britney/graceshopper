@@ -33,7 +33,7 @@ export class AllGenies extends React.Component {
 
         <div className="container">
           <div className="row row-cols-1 row-cols-md-2 g-4">
-            {genies.length === 0 || genies === undefined ? (
+            {genies.length === 0 ? (
               <div className="card">
                 <div className="card-body">
                   <h6>**There are no genies available**</h6>

@@ -43,7 +43,7 @@ class SingleGenieComponent extends React.Component {
   }
 
   render() {
-    const genie = this.props.genie || {};
+    const genie = this.props.genie ?? {}; // trying nullish coalescing led to linter error
     // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
     const { userId } = this.props;
     return (
@@ -68,7 +68,6 @@ class SingleGenieComponent extends React.Component {
                 Genie ability: {genie.ability}
               </h3>
               <h4 className="card-title text-center">
-                {/* AN Note: This is currently a non-functioning button*/}
                 <button
                   type="submit"
                   onClick={() => this.handleClick(genie.id)}
