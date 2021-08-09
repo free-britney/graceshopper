@@ -16,6 +16,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // EH Edit - this is the route to serve up single genies
+// in this get route -- try using require token to see if it's logged-in 
 router.get('/:genieId', async (req, res, next) => {
   try {
     const singleGenie = await Genie.findByPk(req.params.genieId)

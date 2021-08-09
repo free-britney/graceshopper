@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleGenie } from "../store/singleGenieRedux";
-import { addToOrder } from "../store/orders";
+import { addToOrder, editOrder } from "../store/orders";
 
 class SingleGenieComponent extends React.Component {
   constructor(props) {
@@ -17,35 +17,49 @@ class SingleGenieComponent extends React.Component {
     // AN: Cart Handler
     // This is the single genie object.
     let cartGenie = this.props.genie;
+    const { userId } = this.props;
     // This is saying if nothing exists in local storage called Cart,
     // Create an empty object called cart.
     // Then create an empty array called geniesInCart.
     // After that push your single genie object into that array.
     // Set a key in local storage called Cart and give it a value of your array of genie object/objects.
-    if (!window.localStorage.getItem("Cart")) {
-      let cart = {};
-      let geniesInCart = [];
-      cart.geniesInCart = geniesInCart;
-      cart.geniesInCart.push(cartGenie);
-      // The key to this is that local storage only holds strings.
-      window.localStorage.setItem("Cart", JSON.stringify(cart.geniesInCart));
-    } else {
-      // However, if Cart exists, then pull the current cart down and turn it from a string into json.
-      let cart = JSON.parse(window.localStorage.getItem("Cart"));
-      // Push the genie object into the cart array of genie objects.
-      cart.push(cartGenie);
-      // Reset local storage with the updated cart.
-      window.localStorage.setItem("Cart", JSON.stringify(cart));
+    if (!userId) { // this is for the guest user 
+      if (!window.localStorage.getItem("Cart")) {
+        let cart = {};
+        let geniesInCart = [];
+        cart.geniesInCart = geniesInCart;
+        cart.geniesInCart.push(cartGenie);
+        // The key to this is that local storage only holds strings.
+        window.localStorage.setItem("Cart", JSON.stringify(cart.geniesInCart));
+      } else {
+        // However, if Cart exists, then pull the current cart down and turn it from a string into json.
+        let cart = JSON.parse(window.localStorage.getItem("Cart"));
+        // Push the genie object into the cart array of genie objects.
+        cart.push(cartGenie);
+        // Reset local storage with the updated cart.
+        window.localStorage.setItem("Cart", JSON.stringify(cart));
+      }
+      // AN: This creates a new order everytime a genie is clicked.  I don't think we want to do that/we should maybe do this on checkout?
+      this.props.addToOrder(genieId);
+    } else { // this is for a logged-in user
+      // if an order associated with user id exists, then we use a put route
+      // else, we create a new order associated with the user id, using a post route
+
+      // if this.state === empty object, post route(create)
+      // else, do a put route
+      // console.log("state", this.state);
+      if (this.state === {}){
+        this.props.addToOrder(genieId); // this add to order is creating a new order with the genie
+      } else {
+        this.props.editOrder(genieId); // this edit order is adding a genie to an existing cart
+      }
     }
-    // AN: This creates a new order everytime a genie is clicked.  I don't think we want to do that/we should maybe do this on checkout?
-    this.props.addToOrder(genieId);
     alert("Added to cart!");
   }
-
+  
   render() {
-    const genie = this.props.genie || {};
     // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
-    const { userId } = this.props;
+    const genie = this.props.genie || {};
     return (
       // AN Edit: Centering and adding temp styling
       <div className="container">
@@ -96,6 +110,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
     addToOrder: (genieId) => dispatch(addToOrder(genieId)),
+    editOrder: (genieId) => dispatch(editOrder(genieId))
   };
 };
 

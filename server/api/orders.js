@@ -19,4 +19,12 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/", async (req, res, next) => {
+  try {
+    const editOrder = await Order.findByPk(req.body.userId);
+    res.json(await editOrder.update(req.body))
+  } catch (error) {
+    next(error)
+  }
+})
 module.exports = router;

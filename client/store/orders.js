@@ -4,6 +4,7 @@ const initialState = {};
 //action type
 const ADD_GENIE_TO_ORDER = "ADD_GENIE_TO_ORDER";
 const GET_ORDER = "GET_ORDER";
+const EDIT_ORDER = "EDIT_ORDER";
 
 //action creator
 export const addGenieToOrder = (genie) => {
@@ -19,6 +20,13 @@ export const getOrder = (order) => {
     order,
   };
 };
+
+export const _editOrder = (order) => { 
+  return {
+    type: EDIT_ORDER,
+    order,
+  }
+}
 
 //thunk creators
 //add to cart
@@ -45,12 +53,26 @@ export const fetchOrder = (orderId) => {
   };
 };
 
+//edit order
+export const editOrder = (genieId) => {
+  return async (dispatch) => {
+    try{
+      const { data } = await axios.put("/api/orders", { genieId });
+      dispatch(_editOrder(data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 //reducer
 export default function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_GENIE_TO_ORDER:
       return action.genie;
     case GET_ORDER:
+      return action.order;
+    case EDIT_ORDER:
       return action.order;
     default:
       return state;
