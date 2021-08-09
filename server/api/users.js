@@ -11,11 +11,6 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'username']
     },
-    // {
-    //   headers: {
-    //     authorization: window.localStorage('token')
-    //   }
-    // }
     )
     res.json(users)
   } catch (error) {
