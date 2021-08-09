@@ -35,6 +35,18 @@ class Orders extends Component {
   handleIncrement(evt) {
     let genieName = evt.target.name;
     this.setState({ cartMap: (this.cartMap[genieName].qty += 1) });
+    // AN Note: I know this is inefficient and I should've structured the cart in local storage as a dictionary to begin with.
+    // But this works so I'm leaving it.
+    let updatedCartForLocalStorage = [];
+    Object.values(this.cartMap).forEach((genieInQuestion) => {
+      for (let i = 0; i < genieInQuestion.qty; i++) {
+        updatedCartForLocalStorage.push(genieInQuestion.genieObject);
+      }
+    });
+    window.localStorage.setItem(
+      "Cart",
+      JSON.stringify(updatedCartForLocalStorage)
+    );
   }
 
   handleDecrement(evt) {
@@ -43,6 +55,18 @@ class Orders extends Component {
     if (this.cartMap[genieName].qty <= 0) {
       delete this.cartMap[genieName];
     }
+    // AN Note: I know this is inefficient and I should've structured the cart in local storage as a dictionary to begin with.
+    // But this works so I'm leaving it.
+    let updatedCartForLocalStorage = [];
+    Object.values(this.cartMap).forEach((genieInQuestion) => {
+      for (let i = 0; i < genieInQuestion.qty; i++) {
+        updatedCartForLocalStorage.push(genieInQuestion.genieObject);
+      }
+    });
+    window.localStorage.setItem(
+      "Cart",
+      JSON.stringify(updatedCartForLocalStorage)
+    );
   }
 
   handleSubmit(evt) {
