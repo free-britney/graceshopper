@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Order } = require("../db");
+const User = require("../db/models/User");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -21,7 +22,12 @@ router.post("/", async (req, res, next) => {
 
 router.put("/", async (req, res, next) => {
   try {
-    const editOrder = await Order.findByPk(req.body.userId);
+    const editOrder = await Order.findAll({
+      include: {
+        model: userId
+      }
+    });
+    console.log(editOrder);
     res.json(await editOrder.update(req.body))
   } catch (error) {
     next(error)

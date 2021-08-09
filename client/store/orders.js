@@ -54,10 +54,10 @@ export const fetchOrder = (orderId) => {
 };
 
 //edit order
-export const editOrder = (genieId) => {
+export const editOrder = (userId) => {
   return async (dispatch) => {
     try{
-      const { data } = await axios.put("/api/orders", { genieId });
+      const { data } = await axios.put("/api/orders", { userId });
       dispatch(_editOrder(data));
     } catch (error) {
       console.log(error)

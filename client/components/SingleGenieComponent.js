@@ -44,14 +44,17 @@ class SingleGenieComponent extends React.Component {
     } else { // this is for a logged-in user
       // if an order associated with user id exists, then we use a put route
       // else, we create a new order associated with the user id, using a post route
-
+      console.log(this.props);
       // if this.state === empty object, post route(create)
       // else, do a put route
-      // console.log("state", this.state);
-      if (this.state === {}){
-        this.props.addToOrder(genieId); // this add to order is creating a new order with the genie
+      // console.log("state", this.state); 
+      // fetch cart with user id and then logic
+      if (this.state !== {}){ 
+        this.props.editOrder(userId); // this edit order is adding a genie to an existing cart
+        //update state
       } else {
-        this.props.editOrder(genieId); // this edit order is adding a genie to an existing cart
+        this.props.addToOrder(genieId); // this add to order is creating a new order with the genie
+        //update state
       }
     }
     alert("Added to cart!");
@@ -103,6 +106,7 @@ const mapState = (state) => {
     genie: state.genie,
     // AN Note: Mapping userid to state so we have access to it.
     userId: state.auth.id,
+    cart: state.order
   };
 };
 
@@ -110,7 +114,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
     addToOrder: (genieId) => dispatch(addToOrder(genieId)),
-    editOrder: (genieId) => dispatch(editOrder(genieId))
+    editOrder: (userId) => dispatch(editOrder(userId))
   };
 };
 

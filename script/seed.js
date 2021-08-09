@@ -3,8 +3,10 @@
 const {
   db,
   models: { User },
+  Genie, 
+  Order
 } = require("../server/db");
-const Genie = require("../server/db/models/Genie");
+// const Genie = require("../server/db/models/Genie");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -13,13 +15,16 @@ const Genie = require("../server/db/models/Genie");
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
-
+  
   // Creating Users
   const users = await Promise.all([
     User.create({ username: "cody", password: "123", adminStatus: true }),
     User.create({ username: "murphy", password: "123" }),
   ]);
-
+  
+    const partialOrder = await Order.create();
+    users[1].addOrder(partialOrder);
+  
   const genie1 = await Genie.create({
     name: "Estelle",
     price: 5000,
@@ -63,6 +68,9 @@ async function seed() {
     inventory: 2,
     genieAbility: "PlaceHolder Text",
   });
+
+  // check out magic methods
+  // create many situations here
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
