@@ -140,7 +140,12 @@ class Orders extends Component {
           }, 0)}
         </div>
         <div className="text-center">
-          <button className="btn-danger btn-md">Checkout</button>
+          <button
+            onClick={() => (window.location.href = `/orders/checkout`)}
+            className="btn-danger btn-md"
+          >
+            Checkout
+          </button>
         </div>
         <div></div>
       </div>
