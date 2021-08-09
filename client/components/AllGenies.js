@@ -17,10 +17,6 @@ export class AllGenies extends React.Component {
   componentDidMount() {
     this.props.getGenies();
   }
-  // handleClick = (genieId) => {
-  //   this.props.addToOrder(genieId);
-  //   alert("Added to Cart!");
-  //  }
    render() {
      // Assigned a new variable, genies, to this.props.genies.
      const genies = this.props.genies;
@@ -33,7 +29,7 @@ export class AllGenies extends React.Component {
 
         <div className="container">
           <div className="row row-cols-1 row-cols-md-2 g-4">
-            {genies.length === 0 || genies === undefined ? (
+            {genies.length === 0 ? (
               <div className="card">
                 <div className="card-body">
                   <h6>**There are no genies available**</h6>
@@ -95,8 +91,6 @@ const mapDispatch = (dispatch) => {
     getGenies: () => {
       dispatch(fetchGenies());
     },
-    //make action here for adding to cart
-    // addToOrder: (genieId) => dispatch(addToOrder(genieId))
   };
 };
 
