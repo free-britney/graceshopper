@@ -6,6 +6,7 @@ const ADD_GENIE_TO_ORDER = "ADD_GENIE_TO_ORDER";
 const GET_ORDER = "GET_ORDER";
 const DELETE_QUANTIY = "DELETE_QUANTIY";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+const TOKEN = "token";
 
 //action creator
 export const addGenieToOrder = (genie) => {
@@ -59,11 +60,11 @@ export const fetchOrder = (orderId) => {
     }
   };
 };
-export const deleteGenie = (id,name) => {
+export const deleteGenie = (id) => {
   return async (dispatch) => {
     try {
-      const {data}= await axios.delete(`/api/orders/genie/${id}`);
-      dispatch(deleteFromCart(data));
+      const {data: genie} = await axios.delete(`/api/genies/${id}`)
+      dispatch(deleteFromCart(genie));
     } catch (error) {
       console.error(error);
     }
@@ -92,24 +93,21 @@ export const editQuantity = (genieObj,history)=> {
 export default function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_GENIE_TO_ORDER:
-      return action.genie;
+      return [...state, action.genies]
     case GET_ORDER:
       return action.order;
-    case DELETE_QUANTIY:
-        if(state.length !== 0)
-          return state.genies.map((genie) => {
-            if (genie.id === action.genieId && genie.wishQty>1) {
-              genie.wishQty = genie.wishQty-1;
-              return genie;
-            }return genie;
-          })
+    // case DELETE_QUANTIY:
+    //     if(state.length !== 0)
+    //       return state.genies.map((genie) => {
+    //         if (genie.id === action.genie.id && genie.wishQty>1) {
+    //           genie.wishQty = genie.wishQty-1;
+    //           return genie;
+    //         }return genie;
+    //       });
     case REMOVE_FROM_CART:
-          const cartAfterDelete = state.genies.filter((genie)=>{
-            return genie.id !== action.genieId
-          });
-          const newState = {...state}
-          newState.genies = cartAfterDelete;
-           return newState
+      return state.filter((genie)=> genie.id !== action.genie.id)
+
+
     default:
       return state;
   }
