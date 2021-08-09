@@ -17,28 +17,33 @@ class SingleGenieComponent extends React.Component {
     // AN: Cart Handler
     // This is the single genie object.
     let cartGenie = this.props.genie;
+    const { userId } = this.props;
     // This is saying if nothing exists in local storage called Cart,
     // Create an empty object called cart.
     // Then create an empty array called geniesInCart.
     // After that push your single genie object into that array.
     // Set a key in local storage called Cart and give it a value of your array of genie object/objects.
-    if (!window.localStorage.getItem("Cart")) {
-      let cart = {};
-      let geniesInCart = [];
-      cart.geniesInCart = geniesInCart;
-      cart.geniesInCart.push(cartGenie);
-      // The key to this is that local storage only holds strings.
-      window.localStorage.setItem("Cart", JSON.stringify(cart.geniesInCart));
+     if (!userId) {
+      if (!window.localStorage.getItem("Cart")) {
+        let cart = {};
+        let geniesInCart = [];
+        cart.geniesInCart = geniesInCart;
+        cart.geniesInCart.push(cartGenie);
+        // The key to this is that local storage only holds strings.
+        window.localStorage.setItem("Cart", JSON.stringify(cart.geniesInCart));
+      } else {
+        // However, if Cart exists, then pull the current cart down and turn it from a string into json.
+        let cart = JSON.parse(window.localStorage.getItem("Cart"));
+        // Push the genie object into the cart array of genie objects.
+        cart.push(cartGenie);
+        // Reset local storage with the updated cart.
+        window.localStorage.setItem("Cart", JSON.stringify(cart));
+      }
+      // AN: This creates a new order everytime a genie is clicked.  I don't think we want to do that/we should maybe do this on checkout?
+      this.props.addToOrder(genieId);
     } else {
-      // However, if Cart exists, then pull the current cart down and turn it from a string into json.
-      let cart = JSON.parse(window.localStorage.getItem("Cart"));
-      // Push the genie object into the cart array of genie objects.
-      cart.push(cartGenie);
-      // Reset local storage with the updated cart.
-      window.localStorage.setItem("Cart", JSON.stringify(cart));
+      console.log("I'm logged in")
     }
-    // AN: This creates a new order everytime a genie is clicked.  I don't think we want to do that/we should maybe do this on checkout?
-    this.props.addToOrder(genieId);
     alert("Added to cart!");
   }
 

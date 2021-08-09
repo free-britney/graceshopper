@@ -17,10 +17,6 @@ export class AllGenies extends React.Component {
   componentDidMount() {
     this.props.getGenies();
   }
-  // handleClick = (genieId) => {
-  //   this.props.addToOrder(genieId);
-  //   alert("Added to Cart!");
-  //  }
    render() {
      // Assigned a new variable, genies, to this.props.genies.
      const genies = this.props.genies;
@@ -95,8 +91,6 @@ const mapDispatch = (dispatch) => {
     getGenies: () => {
       dispatch(fetchGenies());
     },
-    //make action here for adding to cart
-    // addToOrder: (genieId) => dispatch(addToOrder(genieId))
   };
 };
 

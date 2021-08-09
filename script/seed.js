@@ -3,8 +3,9 @@
 const {
   db,
   models: { User },
+  Genie,
+  Order
 } = require("../server/db");
-const Genie = require("../server/db/models/Genie");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -19,6 +20,9 @@ async function seed() {
     User.create({ username: "cody", password: "123", adminStatus: true }),
     User.create({ username: "murphy", password: "123" }),
   ]);
+
+  const partialOrder = await Order.create();
+  users[1].addOrder(partialOrder);
 
   const genie1 = await Genie.create({
     name: "Estelle",
