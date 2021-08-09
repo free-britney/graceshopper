@@ -5,7 +5,9 @@ import { fetchOrder } from "../store/orders";
 class Orders extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      order: []
+    };
     console.log(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,6 +24,8 @@ class Orders extends Component {
   }
   
   render() {
+    const { order } = this.props;
+    console.log("order", order);
     // console.log(this.props);
     return (
     <div>Orders</div>
