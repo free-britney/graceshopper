@@ -41,16 +41,18 @@ class SingleGenieComponent extends React.Component {
       }
       // AN: This creates a new order everytime a genie is clicked.  I don't think we want to do that/we should maybe do this on checkout?
       this.props.addToOrder(genieId);
-    } else {
-      console.log("I'm logged in");
+    }  else { // this is for a logged-in user
+      // send the userId here 
+      this.props.addToOrder(genieId, userId); // this add to order is creating a new order with the genie
+        //update state
     }
     alert("Added to cart!");
   }
 
   render() {
     const genie = this.props.genie ?? {}; // trying nullish coalescing led to linter error
-    // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
     const { userId } = this.props;
+    // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
     return (
       // AN Edit: Centering and adding temp styling
       <div className="container">
@@ -104,7 +106,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
-    addToOrder: (genieId) => dispatch(addToOrder(genieId)),
+    addToOrder: (genieId, userId) => dispatch(addToOrder(genieId, userId)),
   };
 };
 

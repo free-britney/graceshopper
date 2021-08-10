@@ -22,16 +22,17 @@ export const getOrder = (order) => {
 
 //thunk creators
 //add to cart
-export const addToOrder = (genieId, history) => {
+export const addToOrder = (genieId, userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/orders", { genieId });
+      const { data } = await axios.put("/api/orders", { genieId, userId });
       dispatch(addGenieToOrder(data));
     } catch (error) {
       console.log(error);
     }
   };
 };
+
 
 //retrieve order in cart
 export const fetchOrder = (orderId) => {
@@ -51,7 +52,7 @@ export default function ordersReducer(state = initialState, action) {
     case ADD_GENIE_TO_ORDER:
       return action.genie;
     case GET_ORDER:
-      return action.order;
+      return {...state, order: action.order};
     default:
       return state;
   }

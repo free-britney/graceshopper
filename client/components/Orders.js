@@ -159,11 +159,10 @@ const mapState = (state) => {
     userId: state.auth.id,
   };
 };
-
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     fetchOrder: (orderId) => dispatch(fetchOrder(orderId)),
   };
 };
 
-export default connect(mapState, mapDispatch)(Orders);
+export default connect(mapState, mapDispatchToProps)(Orders);
