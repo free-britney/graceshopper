@@ -10,7 +10,7 @@ import { me } from "./store";
 import Orders from "./components/Orders";
 import Admin from "./components/Admin";
 // AN Edit: Importing Checkout Component
-// import Checkout from "./components/Checkout";
+import { CheckoutCart } from "../client/components/Checkout";
 
 /**
  * COMPONENT
@@ -30,7 +30,9 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/orders" component={Orders} />
+
+            <Route exact path="/orders" component={Orders} />
+            <Route exact path="/orders/checkout" component={CheckoutCart} />
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
             <Route
@@ -52,8 +54,8 @@ class Routes extends Component {
               path="/genies/:genieId"
               component={SingleGenieComponent}
             />
+            <Route exact path="/orders/checkout" component={CheckoutCart} />
             <Route path="/orders" component={Orders} />
-            {/* <Route exact path="/orders/checkout" component={Checkout} /> */}
           </Switch>
         )}
       </div>
