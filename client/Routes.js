@@ -7,9 +7,10 @@ import SingleGenieComponent from "./components/SingleGenieComponent";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
-// import Orders from "./components/Orders";
-import Cart from "./components/Cart";
-import Admin from "./components/Admin"
+import Orders from "./components/Orders";
+import Admin from "./components/Admin";
+// AN Edit: Importing Checkout Component
+// import Checkout from "./components/Checkout";
 
 /**
  * COMPONENT
@@ -29,8 +30,8 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            {/* <Route path="/orders" component={Orders} /> */}
-            <Route path="/orders" component={Cart} />
+            <Route path="/orders" component={Orders} />
+
             {/* AN Edit: Adding All Genies Route If Logged In */}
             <Route exact path="/genies" component={AllGenies} />
             <Route
@@ -52,9 +53,8 @@ class Routes extends Component {
               path="/genies/:genieId"
               component={SingleGenieComponent}
             />
-            {/* AN Note: I think that the cart route should be /orders/:orderId */}
-            {/* <Route path="/orders" component={Orders} /> */}
-            <Route path="/orders" component={Cart} />
+            <Route path="/orders" component={Orders} />
+            {/* <Route exact path="/orders/checkout" component={Checkout} /> */}
           </Switch>
         )}
       </div>
