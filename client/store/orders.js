@@ -30,11 +30,24 @@ export const _editOrder = (order) => {
 
 //thunk creators
 //add to cart
-export const addToOrder = (genieId) => {
+export const addToOrder = (genieId, userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/orders", { genieId });
-      dispatch(addGenieToOrder(data));
+      if (userId){
+        if (orderStatus === 'pending'){
+          const { data } = await axios.post("/api/orders", { genieId , userId});
+          dispatch(addGenieToOrder(data));
+        } else {
+          const { data } = await axios.put("/api/orders", { genieId });
+          dispatch(_editOrder(data));
+        }
+      } else {
+        const { data } = await axios.post("/api/orders", { genieId , userId});
+        dispatch(addGenieToOrder(data));
+      }
+      // check if status is pending -- that is the cart
+      // add logic here to do put if not pending
+      // how do i check for orderstatus
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +66,7 @@ export const fetchOrder = (orderId) => {
   };
 };
 
-//edit order
+// //edit order
 export const editOrder = (userId) => {
   return async (dispatch) => {
     try{

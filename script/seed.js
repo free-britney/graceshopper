@@ -30,7 +30,7 @@ async function seed() {
     price: 5000,
     description: "PlaceHolder Text",
     imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
+      "https://i.imgur.com/Xb93PTF.png",
     wishQty: 3,
     inventory: 2,
     genieAbility: "PlaceHolder Text",
@@ -52,7 +52,7 @@ async function seed() {
     price: 5000,
     description: "PlaceHolder Text",
     imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
+      "https://i.imgur.com/9OOSHLm.png",
     wishQty: 3,
     inventory: 2,
     genieAbility: "PlaceHolder Text",
@@ -63,7 +63,106 @@ async function seed() {
     price: 5000,
     description: "PlaceHolder Text",
     imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
+      "https://i.imgur.com/qa5J4rQ.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie5 = await Genie.create({
+    name: "Fezz",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/olffwwk.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie6 = await Genie.create({
+    name: "Miracle",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/QAZNVIy.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie7 = await Genie.create({
+    name: "Picasso",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/yN7bmup.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie8 = await Genie.create({
+    name: "Fortune",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/yuKDPE8.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie9 = await Genie.create({
+    name: "Sultan",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/R1jz5h7.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie10 = await Genie.create({
+    name: "Yodel",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/YOKE3AC.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie11 = await Genie.create({
+    name: "Biff",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/MEGFwos.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie12 = await Genie.create({
+    name: "Serenity",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/c7ga1td.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie13 = await Genie.create({
+    name: "Shepard",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL:
+      "https://i.imgur.com/WM3Osha.png",
     wishQty: 3,
     inventory: 2,
     genieAbility: "PlaceHolder Text",

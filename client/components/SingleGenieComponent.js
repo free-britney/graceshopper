@@ -42,20 +42,9 @@ class SingleGenieComponent extends React.Component {
       // AN: This creates a new order everytime a genie is clicked.  I don't think we want to do that/we should maybe do this on checkout?
       this.props.addToOrder(genieId);
     } else { // this is for a logged-in user
-      // if an order associated with user id exists, then we use a put route
-      // else, we create a new order associated with the user id, using a post route
-      console.log(this.props);
-      // if this.state === empty object, post route(create)
-      // else, do a put route
-      // console.log("state", this.state); 
-      // fetch cart with user id and then logic
-      if (this.state !== {}){ 
-        this.props.editOrder(userId); // this edit order is adding a genie to an existing cart
+      // send the userId here 
+      this.props.addToOrder(genieId, userId); // this add to order is creating a new order with the genie
         //update state
-      } else {
-        this.props.addToOrder(genieId); // this add to order is creating a new order with the genie
-        //update state
-      }
     }
     alert("Added to cart!");
   }
@@ -105,16 +94,15 @@ const mapState = (state) => {
   return {
     genie: state.genie,
     // AN Note: Mapping userid to state so we have access to it.
-    userId: state.auth.id,
-    cart: state.order
+    userId: state.auth.id
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     loadSingleGenie: (id) => dispatch(fetchSingleGenie(id)),
-    addToOrder: (genieId) => dispatch(addToOrder(genieId)),
-    editOrder: (userId) => dispatch(editOrder(userId))
+    addToOrder: (genieId, userId) => dispatch(addToOrder(genieId, userId)),
+    // editOrder: (userId) => dispatch(editOrder(userId))
   };
 };
 
