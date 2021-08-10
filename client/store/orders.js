@@ -42,18 +42,7 @@ export const addToOrder = (genieId, userId) => {
 };
 
 //retrieve order in cart
-// if (userId){
-  //   if (orderStatus !== 'pending'){
-    //     const { data } = await axios.post("/api/orders", { genieId , userId});
-    //     dispatch(addGenieToOrder(data));
-    //   } else {
-      //     const { data } = await axios.put("/api/orders", { genieId, userId });
-      //     dispatch(_editOrder(data));
-      //   }
-      // } else {
-  // check if status is pending -- that is the cart
-  // add logic here to do put if not pending
-  // how do i check for orderstatus
+
 export const fetchOrder = (orderId) => {
   return async (dispatch) => {
     try {
