@@ -23,7 +23,15 @@ router.get('/:genieId', async (req, res, next) => {
     // o: what happens when you don't find a genie?
     if (singleGenie) {
       res.json(singleGenie);
-    }
+    } 
+    
+    // o: this is a good pattern for error handling
+    // else {
+    //   next({
+    //     status: 404,
+    //     message: "Genie not found"
+    //   })
+    // }
   } catch(error) {
     next(error);
   }

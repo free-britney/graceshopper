@@ -39,14 +39,17 @@ class Orders extends Component {
   handleIncrement(evt) {
     let genieName = evt.target.name;
     this.setState({ cartMap: (this.cartMap[genieName].qty += 1) });
+
     // AN Note: I know this is inefficient and I should've structured the cart in local storage as a dictionary to begin with.
     // But this works so I'm leaving it.
+    // o: you can modify this into a map
     let updatedCartForLocalStorage = [];
     Object.values(this.cartMap).forEach((genieInQuestion) => {
       for (let i = 0; i < genieInQuestion.qty; i++) {
         updatedCartForLocalStorage.push(genieInQuestion.genieObject);
       }
     });
+    
     window.localStorage.setItem(
       "Cart",
       JSON.stringify(updatedCartForLocalStorage)
@@ -62,6 +65,8 @@ class Orders extends Component {
     // AN Note: I know this is inefficient and I should've structured the cart in local storage as a dictionary to begin with.
     // But this works so I'm leaving it.
     let updatedCartForLocalStorage = [];
+    
+    // o: you can modify this into a map 
     Object.values(this.cartMap).forEach((genieInQuestion) => {
       for (let i = 0; i < genieInQuestion.qty; i++) {
         updatedCartForLocalStorage.push(genieInQuestion.genieObject);
@@ -138,6 +143,7 @@ class Orders extends Component {
         <div className="text-center">
           <span className="text-primary"> Total Amount Due: </span>
           {Object.values(this.cartMap).reduce((acc, genieObject) => {
+            // o: you can place this display logic in a function (like utils.js)
             return (
               acc + (genieObject.qty * genieObject.genieObject.price) / 100
             );

@@ -16,6 +16,7 @@ class Admin extends React.Component {
     return (
       <div>
         Users - admin view only
+        {/* o: you can use destructuring here as well */}
         {users.map((user) => (
           <div key={user.id}>
             <div>{user.id}</div>
