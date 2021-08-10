@@ -19,8 +19,10 @@ class Orders extends Component {
       }
     });
     this.startingKeyForMap = 1;
-    this.state = { cart: this.cart };
+    this.state = { cart: this.cart, cartMap: this.cartMap };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
   }
   componentDidMount() {
     // AN Note: I think the strategy here should be if the orderId exists (aka a user is logged in), retrieve the cart based on their userId.
@@ -28,6 +30,43 @@ class Orders extends Component {
     // let orderId = this.props.match.params.id;
     // console.log("these are the props!" , this.props);
     // this.props.fetchOrder(this.props.order.id);
+  }
+
+  handleIncrement(evt) {
+    let genieName = evt.target.name;
+    this.setState({ cartMap: (this.cartMap[genieName].qty += 1) });
+    // AN Note: I know this is inefficient and I should've structured the cart in local storage as a dictionary to begin with.
+    // But this works so I'm leaving it.
+    let updatedCartForLocalStorage = [];
+    Object.values(this.cartMap).forEach((genieInQuestion) => {
+      for (let i = 0; i < genieInQuestion.qty; i++) {
+        updatedCartForLocalStorage.push(genieInQuestion.genieObject);
+      }
+    });
+    window.localStorage.setItem(
+      "Cart",
+      JSON.stringify(updatedCartForLocalStorage)
+    );
+  }
+
+  handleDecrement(evt) {
+    let genieName = evt.target.name;
+    this.setState({ cartMap: (this.cartMap[genieName].qty -= 1) });
+    if (this.cartMap[genieName].qty <= 0) {
+      delete this.cartMap[genieName];
+    }
+    // AN Note: I know this is inefficient and I should've structured the cart in local storage as a dictionary to begin with.
+    // But this works so I'm leaving it.
+    let updatedCartForLocalStorage = [];
+    Object.values(this.cartMap).forEach((genieInQuestion) => {
+      for (let i = 0; i < genieInQuestion.qty; i++) {
+        updatedCartForLocalStorage.push(genieInQuestion.genieObject);
+      }
+    });
+    window.localStorage.setItem(
+      "Cart",
+      JSON.stringify(updatedCartForLocalStorage)
+    );
   }
 
   handleSubmit(evt) {
@@ -68,12 +107,24 @@ class Orders extends Component {
                 </td>
                 <td>
                   <div className="text-center">
-                    <button className="btn-danger btn-md">+</button>
+                    <button
+                      name={this.cartMap[item].genieObject.name}
+                      onClick={this.handleIncrement}
+                      className="btn-danger btn-md"
+                    >
+                      +
+                    </button>
                   </div>
                 </td>
                 <td>
                   <div className="text-center">
-                    <button className="btn-danger btn-md">-</button>
+                    <button
+                      name={this.cartMap[item].genieObject.name}
+                      onClick={this.handleDecrement}
+                      className="btn-danger btn-md"
+                    >
+                      -
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -82,10 +133,19 @@ class Orders extends Component {
         </table>
         <div className="text-center">
           <span className="text-primary"> Total Amount Due: </span>
-          {cart.reduce((acc, currentVal) => acc + currentVal.price / 100, 0)}
+          {Object.values(this.cartMap).reduce((acc, genieObject) => {
+            return (
+              acc + (genieObject.qty * genieObject.genieObject.price) / 100
+            );
+          }, 0)}
         </div>
         <div className="text-center">
-          <button className="btn-danger btn-md">Checkout</button>
+          <button
+            onClick={() => (window.location.href = `/orders/checkout`)}
+            className="btn-danger btn-md"
+          >
+            Checkout
+          </button>
         </div>
         <div></div>
       </div>

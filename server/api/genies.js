@@ -20,7 +20,9 @@ router.get("/", async (req, res, next) => {
 router.get('/:genieId', async (req, res, next) => {
   try {
     const singleGenie = await Genie.findByPk(req.params.genieId)
-    res.json(singleGenie);
+    if (singleGenie) {
+      res.json(singleGenie);
+    }
   } catch(error) {
     next(error);
   }
