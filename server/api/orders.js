@@ -29,9 +29,25 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put("/", async (req, res, next) => {
-  try {
-    const editOrder = await Order.findByPk(req.body.orderId);
-    res.json(await editOrder.update(req.body))
+  try { 
+    if(req.body.userId){  // if there is a user, and the next line, we will see if the user has a cart
+      const hasCart = await Order.findOne({
+        where: {
+          userId: req.body.userId,
+          orderStatus: "pending"
+        }
+      }) 
+      // console.log(hasCart);
+      if(hasCart){
+        // const editOrder = await Order.findByPk(req.body);
+        // res.json(await editOrder.update(req.body))
+        console.log(req.body);
+      }
+    }
+
+    // moving all logic here
+    // const editOrder = await Order.findByPk(req.body.orderId);
+    // res.json(await editOrder.update(req.body))
   } catch (error) {
     next(error)
   }

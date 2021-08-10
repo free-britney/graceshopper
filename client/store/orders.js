@@ -33,16 +33,17 @@ export const _editOrder = (order) => {
 export const addToOrder = (genieId, userId) => {
   return async (dispatch) => {
     try {
-      if (userId){
-        if (orderStatus === 'pending'){
-          const { data } = await axios.post("/api/orders", { genieId , userId});
-          dispatch(addGenieToOrder(data));
-        } else {
-          const { data } = await axios.put("/api/orders", { genieId });
-          dispatch(_editOrder(data));
-        }
-      } else {
-        const { data } = await axios.post("/api/orders", { genieId , userId});
+      // if (userId){
+      //   if (orderStatus !== 'pending'){
+      //     const { data } = await axios.post("/api/orders", { genieId , userId});
+      //     dispatch(addGenieToOrder(data));
+      //   } else {
+      //     const { data } = await axios.put("/api/orders", { genieId, userId });
+      //     dispatch(_editOrder(data));
+      //   }
+      // } else {
+        {
+        const { data } = await axios.put("/api/orders", { genieId , userId});
         dispatch(addGenieToOrder(data));
       }
       // check if status is pending -- that is the cart
