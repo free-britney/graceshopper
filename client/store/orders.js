@@ -4,7 +4,7 @@ const initialState = {};
 //action type
 const ADD_GENIE_TO_ORDER = "ADD_GENIE_TO_ORDER";
 const GET_ORDER = "GET_ORDER";
-const EDIT_ORDER = "EDIT_ORDER";
+// const EDIT_ORDER = "EDIT_ORDER";
 
 //action creator
 export const addGenieToOrder = (genie) => {
@@ -21,34 +21,20 @@ export const getOrder = (order) => {
   };
 };
 
-export const _editOrder = (order) => { 
-  return {
-    type: EDIT_ORDER,
-    order,
-  }
-}
+// export const _editOrder = (order) => { 
+//   return {
+//     type: EDIT_ORDER,
+//     order,
+//   }
+// }
 
 //thunk creators
 //add to cart
 export const addToOrder = (genieId, userId) => {
   return async (dispatch) => {
     try {
-      // if (userId){
-      //   if (orderStatus !== 'pending'){
-      //     const { data } = await axios.post("/api/orders", { genieId , userId});
-      //     dispatch(addGenieToOrder(data));
-      //   } else {
-      //     const { data } = await axios.put("/api/orders", { genieId, userId });
-      //     dispatch(_editOrder(data));
-      //   }
-      // } else {
-        {
         const { data } = await axios.put("/api/orders", { genieId , userId});
         dispatch(addGenieToOrder(data));
-      }
-      // check if status is pending -- that is the cart
-      // add logic here to do put if not pending
-      // how do i check for orderstatus
     } catch (error) {
       console.log(error);
     }
@@ -56,6 +42,18 @@ export const addToOrder = (genieId, userId) => {
 };
 
 //retrieve order in cart
+// if (userId){
+  //   if (orderStatus !== 'pending'){
+    //     const { data } = await axios.post("/api/orders", { genieId , userId});
+    //     dispatch(addGenieToOrder(data));
+    //   } else {
+      //     const { data } = await axios.put("/api/orders", { genieId, userId });
+      //     dispatch(_editOrder(data));
+      //   }
+      // } else {
+  // check if status is pending -- that is the cart
+  // add logic here to do put if not pending
+  // how do i check for orderstatus
 export const fetchOrder = (orderId) => {
   return async (dispatch) => {
     try {
@@ -68,16 +66,16 @@ export const fetchOrder = (orderId) => {
 };
 
 // //edit order
-export const editOrder = (userId) => {
-  return async (dispatch) => {
-    try{
-      const { data } = await axios.put("/api/orders", { userId });
-      dispatch(_editOrder(data));
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
+// export const editOrder = (userId) => {
+//   return async (dispatch) => {
+//     try{
+//       const { data } = await axios.put("/api/orders", { userId });
+//       dispatch(_editOrder(data));
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+// }
 
 //reducer
 export default function ordersReducer(state = initialState, action) {
@@ -86,8 +84,8 @@ export default function ordersReducer(state = initialState, action) {
       return action.genie;
     case GET_ORDER:
       return action.order;
-    case EDIT_ORDER:
-      return action.order;
+    // case EDIT_ORDER:
+    //   return action.order;
     default:
       return state;
   }
