@@ -22,16 +22,17 @@ export const getOrder = (order) => {
 
 //thunk creators
 //add to cart
-export const addToOrder = (genieId, history) => {
+export const addToOrder = (genieId, history, userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/orders", { genieId });
+      const { data } = await axios.put("/api/orders", { genieId, userId });
       dispatch(addGenieToOrder(data));
     } catch (error) {
       console.log(error);
     }
   };
 };
+
 
 //retrieve order in cart
 export const fetchOrder = (orderId) => {
