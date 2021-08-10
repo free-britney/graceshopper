@@ -3,6 +3,7 @@ const router = require("express").Router();
 
 // AN Edit - Requiring in Genie Model since I'll need to pull data from it
 const { Genie } = require("../db");
+const { requireToken, isAdmin } = require('./gateKeepingMiddleware')
 
 // AN Edit - This is the route to serve up all genies available for purchase
 router.get("/", async (req, res, next) => {
@@ -18,8 +19,40 @@ router.get("/", async (req, res, next) => {
 router.get('/:genieId', async (req, res, next) => {
   try {
     const singleGenie = await Genie.findByPk(req.params.genieId)
-    res.json(singleGenie);
+    if (singleGenie) {
+      res.json(singleGenie);
+    }
   } catch(error) {
+    next(error);
+  }
+})
+
+// EH  - admin route for add product POST works in postman
+router.post('/', requireToken, isAdmin, async (req, res, next) => {
+  try {
+    res.status(201).send(await Genie.create(req.body));
+  } catch (error) {
+    next(error);
+  }
+})
+
+// EH - admin route for edit product PUT works in postman
+router.put('/:genieId', requireToken, isAdmin, async (req, res, next) => {
+  try {
+    const genie = await Genie.findByPk(req.params.genieId);
+    res.json(genie.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+})
+
+// EH - admin route for delete product DELETE works in postman
+router.delete('/:genieId', requireToken, isAdmin, async (req, res, next) => {
+  try {
+    const genieToDestroy = await Genie.findByPk(req.params.genieId);
+    await genieToDestroy.destroy();
+    res.send(genieToDestroy);
+  } catch (error) {
     next(error);
   }
 })
