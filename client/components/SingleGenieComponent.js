@@ -51,8 +51,8 @@ class SingleGenieComponent extends React.Component {
 
   render() {
     const genie = this.props.genie ?? {}; // trying nullish coalescing led to linter error
-    // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
     const { userId } = this.props;
+    // AN Note: I mapped auth.id to state so I can have access to userid when someone is logged in.
     return (
       // AN Edit: Centering and adding temp styling
       <div className="container">
