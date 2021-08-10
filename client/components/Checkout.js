@@ -14,6 +14,8 @@ import React from "react";
 export class CheckoutCart extends React.Component {
   constructor() {
     super();
+
+    // o: this should be done in the componentDidMount
     this.cart = JSON.parse(window.localStorage.getItem("Cart")) || [];
     this.state = {
       name: "",

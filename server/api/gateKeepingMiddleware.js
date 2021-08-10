@@ -1,5 +1,6 @@
 const { models: { User } } = require('../db')
 
+// o: is there a middleware for checking if someone is loggedin or not?
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization

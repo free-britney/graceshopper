@@ -5,10 +5,13 @@ import { fetchOrder } from "../store/orders";
 class Orders extends Component {
   constructor(props) {
     super(props);
+    // o: this should be done on componentDidMount
     // AN Note: Displaying Cart on Orders Page:
     // If local storage cart exists, this.cart = local storage cart.
     // If it doesn't, set this.cart to an empty array.
     this.cart = JSON.parse(window.localStorage.getItem("Cart")) || [];
+    
+    // o: what exactly is happening here?
     // AN Note: Creating a countMap to track qty of the cart.
     this.cartMap = {};
     this.cart.forEach((genie) => {
@@ -32,6 +35,7 @@ class Orders extends Component {
     // this.props.fetchOrder(this.props.order.id);
   }
 
+  // o: what is happening here?
   handleIncrement(evt) {
     let genieName = evt.target.name;
     this.setState({ cartMap: (this.cartMap[genieName].qty += 1) });

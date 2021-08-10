@@ -19,6 +19,8 @@ router.get("/", async (req, res, next) => {
 router.get('/:genieId', async (req, res, next) => {
   try {
     const singleGenie = await Genie.findByPk(req.params.genieId)
+
+    // o: what happens when you don't find a genie?
     if (singleGenie) {
       res.json(singleGenie);
     }
@@ -39,6 +41,7 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
 // EH - admin route for edit product PUT works in postman
 router.put('/:genieId', requireToken, isAdmin, async (req, res, next) => {
   try {
+    // o: you can do this in one query => https://sequelizedocs.fullstackacademy.com/inserting-updating-destroying/#modelupdate
     const genie = await Genie.findByPk(req.params.genieId);
     res.json(genie.update(req.body));
   } catch (error) {
@@ -49,6 +52,7 @@ router.put('/:genieId', requireToken, isAdmin, async (req, res, next) => {
 // EH - admin route for delete product DELETE works in postman
 router.delete('/:genieId', requireToken, isAdmin, async (req, res, next) => {
   try {
+    // o: you can do this in one query => https://sequelizedocs.fullstackacademy.com/inserting-updating-destroying/#modeldestroy
     const genieToDestroy = await Genie.findByPk(req.params.genieId);
     await genieToDestroy.destroy();
     res.send(genieToDestroy);

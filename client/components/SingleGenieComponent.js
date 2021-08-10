@@ -24,6 +24,7 @@ class SingleGenieComponent extends React.Component {
     // After that push your single genie object into that array.
     // Set a key in local storage called Cart and give it a value of your array of genie object/objects.
     if (!userId) {
+      // o: hmmm... I have thoughts
       if (!window.localStorage.getItem("Cart")) {
         let cart = {};
         let geniesInCart = [];

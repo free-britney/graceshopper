@@ -36,6 +36,7 @@ export class AllGenies extends React.Component {
                 </div>
               </div>
             ) : (
+              // o: you can use destructuring here
               genies.map((genie) => (
                 <div key={genie.id} className="col">
                   <img

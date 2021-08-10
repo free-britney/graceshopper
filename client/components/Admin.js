@@ -11,6 +11,7 @@ class Admin extends React.Component {
   }
 
   render() {
+    // o: can use nullish coalescing here => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
     const { users } = this.props || []
     return (
       <div>
