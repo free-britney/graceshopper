@@ -4,7 +4,7 @@ const {
   db,
   models: { User },
   Genie,
-  Order
+  Order,
 } = require("../server/db");
 
 /**
@@ -25,22 +25,21 @@ async function seed() {
   users[1].addOrder(partialOrder);
 
   const genie1 = await Genie.create({
-    name: "Estelle",
-    price: 5000,
-    description: "PlaceHolder Text",
-    imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
-    wishQty: 3,
-    inventory: 2,
-    genieAbility: "PlaceHolder Text",
+    name: "Anna",
+    price: 100000,
+    description: "Founder of the Annamaniacs and the Purveyor of Guidance.",
+    imageURL: "https://i.imgur.com/QAZNVIy.png",
+    wishQty: 10,
+    inventory: 1,
+    genieAbility:
+      "Boiling down complex concepts.  Helps you work through answers on your own while clarifying your understanding at the same time!",
   });
 
   const genie2 = await Genie.create({
     name: "Katya",
     price: 5000,
     description: "PlaceHolder Text",
-    imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
+    imageURL: "https://i.imgur.com/Xb93PTF.png",
     wishQty: 3,
     inventory: 2,
     genieAbility: "PlaceHolder Text",
@@ -50,8 +49,7 @@ async function seed() {
     name: "Dominque",
     price: 5000,
     description: "PlaceHolder Text",
-    imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
+    imageURL: "https://i.imgur.com/yN7bmup.png",
     wishQty: 3,
     inventory: 2,
     genieAbility: "PlaceHolder Text",
@@ -61,8 +59,67 @@ async function seed() {
     name: "The Genie",
     price: 5000,
     description: "PlaceHolder Text",
-    imageURL:
-      "https://i.pinimg.com/originals/49/24/8f/49248fb7831b2421910a638e85726719.jpg",
+    imageURL: "https://i.imgur.com/olffwwk.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie5 = await Genie.create({
+    name: "Placeholder Genie 5",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL: "https://i.imgur.com/yuKDPE8.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie6 = await Genie.create({
+    name: "Placeholder Genie 6",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL: "https://i.imgur.com/9OOSHLm.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie7 = await Genie.create({
+    name: "Placeholder Genie 7",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL: "https://i.imgur.com/R1jz5h7.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie8 = await Genie.create({
+    name: "Placeholder Genie 8",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL: "https://i.imgur.com/YOKE3AC.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie9 = await Genie.create({
+    name: "Placeholder Genie 9",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL: "https://i.imgur.com/MEGFwos.png",
+    wishQty: 3,
+    inventory: 2,
+    genieAbility: "PlaceHolder Text",
+  });
+
+  const genie10 = await Genie.create({
+    name: "Placeholder Genie 10",
+    price: 5000,
+    description: "PlaceHolder Text",
+    imageURL: "https://i.imgur.com/qa5J4rQ.png",
     wishQty: 3,
     inventory: 2,
     genieAbility: "PlaceHolder Text",
