@@ -5,7 +5,6 @@ const db = require("./db");
 const User = require("./models/User");
 const Genie = require("./models/Genie");
 const Order = require("./models/Order");
-// const { BelongsToMany } = require('sequelize/types')
 
 //associations could go here!
 
@@ -14,6 +13,7 @@ Order.belongsToMany(Genie, { through: "Orderline" });
 
 Order.belongsTo(User);
 User.hasMany(Order);
+
 
 module.exports = {
   db,
