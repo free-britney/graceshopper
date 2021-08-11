@@ -89,8 +89,8 @@ class Orders extends Component {
               <th scope="col">#</th>
               <th scope="col">Genie Name</th>
               <th scope="col">Qty</th>
-              <th scope="col">Price Per Item</th>
-              <th scope="col">Total Cost Per Line Item</th>
+              <th scope="col">Price Per Item(in $)</th>
+              <th scope="col">Total Cost Per Line Item(in $)</th>
               <th scope="col">Increase Qty</th>
               <th scope="col">Decrease Qty</th>
             </tr>
