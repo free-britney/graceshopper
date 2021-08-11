@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/orders";
+import { formatCurrency } from "./util"
 
 class Orders extends Component {
   constructor(props) {
@@ -133,11 +134,11 @@ class Orders extends Component {
         </table>
         <div className="text-center">
           <span className="text-primary"> Total Amount Due: </span>
-          {Object.values(this.cartMap).reduce((acc, genieObject) => {
+          {formatCurrency(Object.values(this.cartMap).reduce((acc, genieObject) => {
             return (
               acc + (genieObject.qty * genieObject.genieObject.price) / 100
             );
-          }, 0)}
+          }, 0))}
         </div>
         <div className="text-center">
           <button

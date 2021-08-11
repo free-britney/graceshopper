@@ -8,6 +8,7 @@ import { fetchGenies } from "../store/genies";
 // Import link.
 import { Link } from "react-router-dom";
 // import { addToOrder } from "../store/orders";
+import { formatCurrency } from "./util";
 
 // AN Edit: Write react class component to display all genies.
 export class AllGenies extends React.Component {
@@ -17,13 +18,9 @@ export class AllGenies extends React.Component {
   componentDidMount() {
     this.props.getGenies();
   }
-  // handleClick = (genieId) => {
-  //   this.props.addToOrder(genieId);
-  //   alert("Added to Cart!");
-  //  }
-   render() {
-     // Assigned a new variable, genies, to this.props.genies.
-     const genies = this.props.genies;
+  render() {
+    // Assigned a new variable, genies, to this.props.genies.
+    const genies = this.props.genies;
     return (
       <div className="container">
         <div className="d-sm-flex justify-content-between align-items-center">
@@ -32,8 +29,8 @@ export class AllGenies extends React.Component {
         <div />
 
         <div className="container">
-          <div className="row row-cols-1 row-cols-md-2 g-4">
-            {genies.length === 0 || genies === undefined ? (
+          <div className="row row-cols-1 row-cols-md-5 g-4">
+            {genies.length === 0 ? (
               <div className="card">
                 <div className="card-body">
                   <h6>**There are no genies available**</h6>
@@ -58,7 +55,7 @@ export class AllGenies extends React.Component {
                         </h6>
                         <h6 className="card-text">
                           <span className="text-primary">Price: </span>
-                          {genie.price}
+                          {formatCurrency(genie.price / 100)}
                         </h6>
                         <h6 className="card-text">
                           <span className="text-primary">Wish Quantity: </span>
@@ -95,8 +92,6 @@ const mapDispatch = (dispatch) => {
     getGenies: () => {
       dispatch(fetchGenies());
     },
-    //make action here for adding to cart
-    // addToOrder: (genieId) => dispatch(addToOrder(genieId))
   };
 };
 

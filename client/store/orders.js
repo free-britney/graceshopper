@@ -139,7 +139,7 @@ export const getOrder = (order) => {
 
 //thunk creators
 //add to cart
-export const addToOrder = (genieId) => {
+export const addToOrder = (genieId, history) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post("/api/orders", { genieId });

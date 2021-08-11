@@ -21,7 +21,7 @@ export const me = () => async dispatch => {
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
-        authorization: token //essentially add this to every thunk route that we want hidden behind an authorization
+        authorization: token
       }
     })
     return dispatch(setAuth(res.data))
