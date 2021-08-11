@@ -8,6 +8,7 @@ import { fetchGenies } from "../store/genies";
 // Import link.
 import { Link } from "react-router-dom";
 // import { addToOrder } from "../store/orders";
+import { formatCurrency } from "./util";
 
 // AN Edit: Write react class component to display all genies.
 export class AllGenies extends React.Component {
@@ -54,7 +55,7 @@ export class AllGenies extends React.Component {
                         </h6>
                         <h6 className="card-text">
                           <span className="text-primary">Price: </span>
-                          {genie.price / 100}
+                          {formatCurrency(genie.price / 100)}
                         </h6>
                         <h6 className="card-text">
                           <span className="text-primary">Wish Quantity: </span>

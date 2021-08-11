@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/orders";
+import { formatCurrency } from "./util"
 
 class Orders extends Component {
   constructor(props) {
@@ -88,8 +89,8 @@ class Orders extends Component {
               <th scope="col">#</th>
               <th scope="col">Genie Name</th>
               <th scope="col">Qty</th>
-              <th scope="col">Price Per Item</th>
-              <th scope="col">Total Cost Per Line Item</th>
+              <th scope="col">Price Per Item(in $)</th>
+              <th scope="col">Total Cost Per Line Item(in $)</th>
               <th scope="col">Increase Qty</th>
               <th scope="col">Decrease Qty</th>
             </tr>
@@ -133,11 +134,11 @@ class Orders extends Component {
         </table>
         <div className="text-center">
           <span className="text-primary"> Total Amount Due: </span>
-          {Object.values(this.cartMap).reduce((acc, genieObject) => {
+          {formatCurrency(Object.values(this.cartMap).reduce((acc, genieObject) => {
             return (
               acc + (genieObject.qty * genieObject.genieObject.price) / 100
             );
-          }, 0)}
+          }, 0))}
         </div>
         <div className="text-center">
           <button

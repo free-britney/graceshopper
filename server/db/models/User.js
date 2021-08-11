@@ -23,9 +23,20 @@ const User = db.define("user", {
   address: {
     type: Sequelize.TEXT,
   },
-  email: {
-    type: Sequelize.STRING,
-  },
+  email:{
+    type:Sequelize.STRING,
+    validate:{
+      isEmail:{
+        args:true,
+        msg:'Valid email-id required'
+        }
+    },
+    unique: {
+      args:true,
+      msg: 'Email address already in use!'
+    }
+},
+
   phone: {
     type: Sequelize.INTEGER,
   },
