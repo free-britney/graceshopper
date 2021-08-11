@@ -4,7 +4,6 @@ import { fetchSingleGenie } from "../store/singleGenieRedux";
 import { addToOrder } from "../store/orders";
 import { formatCurrency } from "./util";
 
-
 class SingleGenieComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -64,7 +63,7 @@ class SingleGenieComponent extends React.Component {
             <div className="col-md-8">
               <h3 className="card-title text-center">{genie.name}</h3>
               <h4 className="card-title text-center">
-                Price: {(genie.price / 100)}
+                Price: {formatCurrency(genie.price / 100)}
               </h4>
               <h5 className="card-title text-center">
                 Description: {genie.description}

@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import { fetchGenies } from "../store/genies";
 // Import link.
 import { Link } from "react-router-dom";
-import { formatCurrency } from "./util";
 // import { addToOrder } from "../store/orders";
+import { formatCurrency } from "./util";
 
 // AN Edit: Write react class component to display all genies.
 export class AllGenies extends React.Component {
